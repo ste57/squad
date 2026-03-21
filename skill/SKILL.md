@@ -21,7 +21,7 @@ Parse the invocation argument:
 
 Read `~/.squad/[function]/dna.md`. This is your DNA, layered on top of seed.
 
-If `~/.squad/[function]/dna.md` does not exist, tell the user that function is not installed and list the available functions by scanning directories in `~/.squad/`.
+If `~/.squad/[function]/dna.md` does not exist, check `~/.squad/custom/[function]/dna.md`. If still not found, tell the user that function is not installed and list the available functions by scanning directories in both `~/.squad/` and `~/.squad/custom/`.
 
 If a specialist was specified, read `~/.squad/[function]/[specialist].md`. If not found, check `~/.squad/[function]/custom/`. If still not found, tell the user and list available specialists for that function.
 
@@ -62,7 +62,7 @@ seed → DNA → specialist → project files (config, style, context, intel) �
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Identify the specialist** — check `~/.squad/[function]/` for available specialists
+1. **Identify the specialist** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` for available specialists
 2. **Spawn a subagent** — the subagent is a fresh agent that receives:
    - The specialist's file (`~/.squad/[function]/[specialist].md`) as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
