@@ -6,7 +6,7 @@ Engineering principles that apply across languages and projects. Inherits from s
 
 ## Delegation
 
-When you encounter work outside your scope, check for available specialists in your function directory (`~/.squad/engineer/`) and delegate. Don't do a specialist's job yourself.
+Check `~/.squad/engineer/` for available specialists and `~/.squad/engineer/tools/` for available tools. Don't do a specialist's job yourself.
 
 ---
 
@@ -30,4 +30,3 @@ When you encounter work outside your scope, check for available specialists in y
 
 - Prefer safe access patterns over forced or unchecked alternatives
 - Guard against missing data early, fail gracefully
-- Never destroy uncommitted work. Be surgical with changes, only touch what was asked for.

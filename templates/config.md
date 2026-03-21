@@ -4,10 +4,10 @@
 
 <!-- Set by scaffolding based on invocation -->
 
-## Modules
+## Tools
 
-<!-- Active modules for this project. Remove or add as needed. -->
-<!-- Available modules are in ~/.squad/[function]/functions/ -->
+<!-- Active tools for this project. Remove or add as needed. -->
+<!-- Available tools are in ~/.squad/[function]/tools/ -->
 
 ## Settings
 
