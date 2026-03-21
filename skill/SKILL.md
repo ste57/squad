@@ -23,7 +23,7 @@ Parse the invocation argument:
 
 Read `~/.squad/[function]/dna.md`. This is your DNA, layered on top of seed.
 
-If `~/.squad/[function]/dna.md` does not exist, check `~/.squad/custom/[function]/dna.md`. If still not found, tell the user that function is not installed and list the available functions by scanning directories in both `~/.squad/` and `~/.squad/custom/`.
+If `~/.squad/[function]/dna.md` does not exist, check `~/.squad/custom/[function]/dna.md`. If still not found, tell the user that function is not installed and list available functions. A directory is a function if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
 If a specialist was specified, read `~/.squad/[function]/[specialist].md`. If not found, check `~/.squad/[function]/custom/`. If still not found, tell the user and list available specialists for that function.
 
@@ -36,7 +36,7 @@ Check if `.squad/` exists in the current working directory.
 - Read `.squad/style.md` for conventions (skip if missing)
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
-- For each active tool listed in config, read `~/.squad/[function]/tools/[tool].md`
+- For each active tool listed in config, read `~/.squad/[function]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
 
 **If it does not exist:**
 - Tell the user: "No .squad/ found in this project. Want me to set it up?"
@@ -47,6 +47,7 @@ Check if `.squad/` exists in the current working directory.
 
 After loading all layers, briefly confirm to the user:
 - Which function and specialist are active
+- Current working directory
 - Which project files were loaded (or that none were found)
 - Which tools are active (if any)
 
@@ -54,34 +55,31 @@ Then begin working. You are now operating as a squad member.
 
 ## Inheritance
 
-Each layer adds to the previous. Nothing is replaced unless explicitly overridden.
+Each layer adds specificity within the bounds set by earlier layers. Seed rules are absolute and cannot be overridden by any subsequent layer.
 
 ```
-seed → DNA → specialist → project files (config, style, context, intel) → tools from config
+seed (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
 ```
 
 ## Delegation (Mid-Task Handoff)
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Read the specialist's file** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` to find it. Read its input spec to know what format it expects.
+1. **Read the specialist's file** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` to find it. A directory is a function if it contains `dna.md`. Read the specialist's input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent is a fresh agent that receives:
    - `~/.squad/seed.md` and `~/.squad/[function]/dna.md` for foundation
    - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
    - The handoff summary structured according to the specialist's input spec
 3. **The subagent works in isolation** — it does not see the parent's full conversation. If the handoff is missing information the specialist needs, the subagent returns early stating what's missing rather than asking mid-task.
-4. **Receive the result** — the subagent returns its findings following its return format
-5. **Validate** — check the result against the original request before continuing
-6. **Clean up** — if the specialist created temporary files (e.g. triage bug files), the delegating agent is responsible for cleanup after the work is confirmed complete
+4. **Subagents do not delegate further.** If a subagent's findings reveal additional work, it reports back to the parent agent, which decides the next action.
+5. **Receive the result** — the subagent returns its findings following its return format
+6. **Validate** — check the result against the original request before continuing
+7. **Clean up** — if the specialist created temporary files (e.g. triage bug files), the delegating agent is responsible for cleanup after the work is confirmed complete
 
 ### Tool Protocols
 
-Tools (logger, publisher) are not spawned as subagents. They are protocols loaded into the active squad member's context via config. When a tool's trigger condition is met (e.g. committing triggers publisher), follow that tool's protocol directly.
-
-### Triage Dual Agents
-
-Triage spawns its own subagents (skeptic and pragmatist) as part of its protocol. These are lightweight review agents, not full squad members — they receive the proposed fix, the root cause analysis, and the relevant code, then evaluate from their assigned perspective. They return a verdict (agree/disagree) with specific reasoning.
+Tools (logger, publisher) are not spawned as subagents. They are protocols loaded into the active squad member's context via config. When a tool's trigger condition is met (e.g., a commit triggers publisher), the active agent follows that tool's protocol inline — no subagent is spawned.
 
 ---
 
