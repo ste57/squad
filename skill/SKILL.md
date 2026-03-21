@@ -58,6 +58,31 @@ Each layer adds to the previous. Nothing is replaced unless explicitly overridde
 seed → DNA → specialist → project files (config, style, context, intel) → tools from config
 ```
 
+## Delegation (Mid-Task Handoff)
+
+When a squad member needs to delegate to a specialist during work:
+
+1. **Identify the specialist** — check `~/.squad/[function]/` for available specialists
+2. **Spawn a subagent** — the subagent is a fresh agent that receives:
+   - The specialist's file (`~/.squad/[function]/[specialist].md`) as its primary instructions
+   - The project's `.squad/` files for context (style, context, intel)
+   - The handoff summary following the specialist's input spec
+3. **The subagent works in isolation** — it does not see the parent's full conversation. It only has its specialist instructions, the project files, and the handoff summary.
+4. **Receive the result** — the subagent returns its findings following its return format
+5. **Validate** — check the result against the original request before continuing
+
+The subagent inherits seed and DNA implicitly through the specialist file (which states "inherits from seed" or "inherits from DNA"). The subagent does not need to re-read seed.md or dna.md — its specialist file is self-contained for the task at hand.
+
+### Tool Delegation
+
+Tools (logger, publisher) are not spawned as subagents. They are protocols the active squad member follows directly, since they are loaded into the current context via config.
+
+### Triage Dual Agents
+
+Triage spawns its own subagents (skeptic and pragmatist) as part of its protocol. These are lightweight review agents, not full squad members — they receive the proposed fix and evaluate it from their assigned perspective.
+
+---
+
 ## Updating Intel
 
 When you discover a non-obvious behavior, pattern, or trap during work, append it to `.squad/intel.md`. Intel is for things learned while working, not things known upfront (those belong in context.md).
