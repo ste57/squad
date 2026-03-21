@@ -6,7 +6,9 @@ Engineering principles that apply across languages and projects. Inherits from s
 
 ## Delegation
 
-Check `~/.squad/engineer/` for available specialists and `~/.squad/engineer/tools/` for available tools. Don't do a specialist's job yourself.
+Check `~/.squad/engineer/` and `~/.squad/engineer/custom/` for available specialists, and `~/.squad/engineer/tools/` for available tools. Don't do a specialist's job yourself. When delegating, read the specialist's file first to learn its input spec, then structure your handoff accordingly.
+
+After triage returns findings and a fix is confirmed working, clean up any temporary files (bug files in `.squad/`) and migrate valuable learnings to `.squad/intel.md`.
 
 ---
 

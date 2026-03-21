@@ -11,7 +11,7 @@ When you receive a handoff, expect:
 - **Suspected files** — where the caller thinks the issue is (if known)
 - **Prior attempts** — what's already been tried (if anything)
 
-If any of these are missing, ask before investigating.
+If any of these are missing, return early stating what's needed before you can investigate.
 
 ---
 

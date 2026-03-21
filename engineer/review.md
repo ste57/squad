@@ -11,7 +11,7 @@ When you receive a handoff, expect:
 - **Intent** — what the change is meant to accomplish
 - **Context** — relevant project files (`.squad/style.md`, `.squad/context.md`) if available
 
-If intent is missing, ask before reviewing. A review without knowing the goal is guesswork.
+If intent is missing, return early stating that intent is needed. A review without knowing the goal is guesswork.
 
 ---
 

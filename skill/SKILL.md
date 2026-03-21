@@ -11,6 +11,8 @@ You are being activated as a squad member. Follow this loading sequence exactly.
 
 Read `~/.squad/seed.md` in full. This is your seed — the universal foundation every squad member inherits. Every rule in it is non-negotiable.
 
+If `~/.squad/seed.md` does not exist, stop. Tell the user squad is not installed and provide setup instructions.
+
 ## 2. Identify Function and Specialist
 
 Parse the invocation argument:
@@ -25,7 +27,7 @@ If `~/.squad/[function]/dna.md` does not exist, check `~/.squad/custom/[function
 
 If a specialist was specified, read `~/.squad/[function]/[specialist].md`. If not found, check `~/.squad/[function]/custom/`. If still not found, tell the user and list available specialists for that function.
 
-## 3. Load Project Layer
+## 3. Load Project Files
 
 Check if `.squad/` exists in the current working directory.
 
@@ -62,24 +64,24 @@ seed → DNA → specialist → project files (config, style, context, intel) �
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Identify the specialist** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` for available specialists
+1. **Read the specialist's file** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` to find it. Read its input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent is a fresh agent that receives:
-   - The specialist's file (`~/.squad/[function]/[specialist].md`) as its primary instructions
+   - `~/.squad/seed.md` and `~/.squad/[function]/dna.md` for foundation
+   - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
-   - The handoff summary following the specialist's input spec
-3. **The subagent works in isolation** — it does not see the parent's full conversation. It only has its specialist instructions, the project files, and the handoff summary.
+   - The handoff summary structured according to the specialist's input spec
+3. **The subagent works in isolation** — it does not see the parent's full conversation. If the handoff is missing information the specialist needs, the subagent returns early stating what's missing rather than asking mid-task.
 4. **Receive the result** — the subagent returns its findings following its return format
 5. **Validate** — check the result against the original request before continuing
+6. **Clean up** — if the specialist created temporary files (e.g. triage bug files), the delegating agent is responsible for cleanup after the work is confirmed complete
 
-The subagent inherits seed and DNA implicitly through the specialist file (which states "inherits from seed" or "inherits from DNA"). The subagent does not need to re-read seed.md or dna.md — its specialist file is self-contained for the task at hand.
+### Tool Protocols
 
-### Tool Delegation
-
-Tools (logger, publisher) are not spawned as subagents. They are protocols the active squad member follows directly, since they are loaded into the current context via config.
+Tools (logger, publisher) are not spawned as subagents. They are protocols loaded into the active squad member's context via config. When a tool's trigger condition is met (e.g. committing triggers publisher), follow that tool's protocol directly.
 
 ### Triage Dual Agents
 
-Triage spawns its own subagents (skeptic and pragmatist) as part of its protocol. These are lightweight review agents, not full squad members — they receive the proposed fix and evaluate it from their assigned perspective.
+Triage spawns its own subagents (skeptic and pragmatist) as part of its protocol. These are lightweight review agents, not full squad members — they receive the proposed fix, the root cause analysis, and the relevant code, then evaluate from their assigned perspective. They return a verdict (agree/disagree) with specific reasoning.
 
 ---
 
@@ -97,10 +99,13 @@ When `.squad/` doesn't exist and the user wants to set up:
    - `style.md` — copy as-is
    - `context.md` — copy as-is
    - `intel.md` — copy as-is
-3. List the contents of `~/.squad/[function]/tools/` to find available tools. If the directory doesn't exist, skip to step 6
-4. Present each available tool to the user with its filename and ask which to enable
-5. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
-6. Tell the user setup is complete, list what was created, and continue operating
+3. List the contents of `~/.squad/[function]/tools/` to find available tools. If the directory doesn't exist, skip to step 7
+4. Read each tool file and present the tool name and its first-line description to the user
+5. Ask which tools to enable
+6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
+7. Tell the user setup is complete and list what was created
+8. Ask the user if they'd like to populate `.squad/style.md` (conventions) or `.squad/context.md` (project description) now. These files start empty and are most useful when filled in.
+9. Load the enabled tools and continue operating
 
 ## Configuration
 

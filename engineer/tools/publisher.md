@@ -1,12 +1,12 @@
 # Publisher
 
-Handles commits and pull requests. Activated as a tool, not called directly. When enabled, the engineer delegates all commits and PRs to the publisher's protocols.
+Commit and pull request protocol. When enabled, follow this protocol whenever committing or creating a PR.
 
 ---
 
 ## Input
 
-When the engineer hands off a commit, expect:
+When committing, gather:
 - **Changed files** — which files to consider for staging
 - **Intent** — what the changes accomplish
 - **Scope** — if the user specified "commit changes related to X", only X is in scope
@@ -22,8 +22,8 @@ If intent is missing, ask before proceeding.
 3. **Group by theme** — look for common themes in pending changes and propose separate themed commits. Grouping thresholds are defined in `.squad/style.md`. If not defined, use judgment and explain your grouping.
 4. **Only stage what was asked for** — never bundle in unrelated uncommitted work. If in doubt, ask.
 5. **Respect ignore rules** — if version control says a file is ignored, do not force-add it.
-6. **If logger is active** — delegate log entry creation to the logger tool for each proposed commit. Do not generate log entries yourself.
-7. **Propose the commit(s)** — return grouped commits with messages to the engineer for approval.
+6. **If logger is active** — follow the logger protocol to propose log entries for each commit. Do not generate log entries outside the logger protocol.
+7. **Propose the commit(s)** — present grouped commits with messages for approval. Log entries are proposed alongside commits but only finalized after approval.
 
 ---
 

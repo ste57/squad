@@ -1,12 +1,12 @@
 # Logger
 
-Tracks changes in a running daily log. Activated as a tool, not called directly. When enabled, the engineer uses the logger's protocols after every commit.
+Daily log protocol. When enabled, follow this protocol after every commit to maintain a running record of changes.
 
 ---
 
 ## Input
 
-When the engineer delegates log entry creation, expect:
+When creating a log entry, gather:
 - **Commit diff** — what changed
 - **Commit message** — the title of the commit
 - **Context** — what problem was being solved (if not obvious from the diff)
