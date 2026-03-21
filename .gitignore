@@ -1,0 +1,12 @@
+# Dev mode (maintainer only)
+dev.md
+
+# Shaping documents
+shaping.md
+slices.md
+
+# User-created custom roles and functions (V6)
+**/custom/
+
+# OS files
+.DS_Store
