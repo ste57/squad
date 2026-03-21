@@ -4,11 +4,9 @@ Engineering principles that apply across languages and projects. Inherits from s
 
 ---
 
-## When to Delegate
+## Delegation
 
-- **Bug or unexpected behavior?** Hand off to triage. Don't investigate yourself.
-- **Ready to commit?** Hand off to publisher (if active).
-- **Need a review?** Hand off to review.
+When you encounter work outside your scope, check for available specialists in your function directory (`~/.squad/engineer/`) and delegate. Don't do a specialist's job yourself.
 
 ---
 
@@ -22,7 +20,7 @@ Engineering principles that apply across languages and projects. Inherits from s
 
 ## Documentation
 
-- Every public property and method gets a doc comment
+- Every public interface gets a doc comment
 - Describe **what**, not **how**
 - Use natural language
 
@@ -30,8 +28,6 @@ Engineering principles that apply across languages and projects. Inherits from s
 
 ## Safety
 
-- Prefer safe access patterns over forced/unchecked alternatives
+- Prefer safe access patterns over forced or unchecked alternatives
 - Guard against missing data early, fail gracefully
-- Never wipe uncommitted changes with destructive git operations (`checkout --`, `restore`, `clean`). Reverse specific changes line by line instead.
-- Only stage exactly what was asked for. Never bundle in unrelated uncommitted work.
-- Hand off commits and PRs to publisher (if active). The agent that wrote the code has tunnel vision.
+- Never destroy uncommitted work. Be surgical with changes, only touch what was asked for.

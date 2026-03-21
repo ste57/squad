@@ -21,9 +21,9 @@ Parse the invocation argument:
 
 Read `~/.squad/[function]/dna.md`. This is your function DNA, layered on top of seed.
 
-If a specialist was specified, also read `~/.squad/[function]/[specialist].md`. This is your specialist layer.
+If `~/.squad/[function]/dna.md` does not exist, tell the user that function is not installed and list the available functions by scanning directories in `~/.squad/`.
 
-Check `~/.squad/[function]/custom/` for user-created specialists if the specified specialist isn't found in the standard location.
+If a specialist was specified, read `~/.squad/[function]/[specialist].md`. If not found, check `~/.squad/[function]/custom/`. If still not found, tell the user and list available specialists for that function.
 
 ## 3. Load Project Layer
 
@@ -31,14 +31,15 @@ Check if `.squad/` exists in the current working directory.
 
 **If it exists:**
 - Read `.squad/config.md` for project settings and active modules
-- Read `.squad/style.md` for code conventions
-- Read `.squad/context.md` for project domain knowledge
-- Read `.squad/intel.md` for accumulated discoveries and traps
+- Read `.squad/style.md` for conventions (skip if missing)
+- Read `.squad/context.md` for project domain knowledge (skip if missing)
+- Read `.squad/intel.md` for accumulated discoveries (skip if missing)
 - For each active module listed in config, read `~/.squad/[function]/functions/[module].md`
 
 **If it does not exist:**
-- Tell the user: "No .squad/ found in this project. Run `/squad config` to set up."
-- Continue operating with seed + function DNA only (no project-specific context)
+- Tell the user: "No .squad/ found in this project. Want me to set it up?"
+- If yes, run the scaffolding flow (see below)
+- If no, continue operating with seed + function DNA only (no project-specific context)
 
 ## 4. Confirm Activation
 
@@ -54,13 +55,32 @@ Then begin working. You are now operating as a squad member.
 Each layer adds to the previous. Nothing is replaced unless explicitly overridden.
 
 ```
-seed.md → function/dna.md → specialist.md → modules from config
+seed → function DNA → specialist → project files (config, style, context, intel) → modules from config
 ```
+
+## Updating Intel
+
+When you discover a non-obvious behavior, pattern, or trap during work, append it to `.squad/intel.md`. Intel is for things learned while working, not things known upfront (those belong in context.md).
+
+## Scaffolding
+
+When `.squad/` doesn't exist and the user wants to set up:
+
+1. Create the `.squad/` directory in the current project root
+2. Read each template from `~/.squad/templates/` and write a copy into `.squad/`:
+   - `config.md` — replace the function comment with the actual function name from the current invocation (e.g. `engineer`)
+   - `style.md` — copy as-is
+   - `context.md` — copy as-is
+   - `intel.md` — copy as-is
+3. List the contents of `~/.squad/[function]/functions/` to find available modules. If the directory doesn't exist, skip to step 6
+4. Present each available module to the user with its filename and ask which to enable
+5. Add the enabled module names to the `## Modules` section in `.squad/config.md`, one per line
+6. Tell the user setup is complete, list what was created, and continue operating
 
 ## Configuration
 
 When the user says `/squad config` or asks to adjust settings:
-- If `.squad/` doesn't exist, scaffold it from `~/.squad/templates/`
-- Present available modules for the current function (from `~/.squad/[function]/functions/`)
-- Let the user enable/disable modules
-- Save choices to `.squad/config.md`
+- If `.squad/` doesn't exist, run the scaffolding flow above
+- If it exists, read `.squad/config.md` and present current settings
+- Let the user enable/disable modules, change default function, or adjust settings
+- Save changes to `.squad/config.md`

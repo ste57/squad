@@ -1,0 +1,8 @@
+# Style
+
+Conventions and rules for how work is done in this project.
+
+---
+
+<!-- Define your project's style rules here. These are specific to the
+function and specialist you're working with. -->
