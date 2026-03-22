@@ -1,4 +1,8 @@
-<h1 align="center">squad</h1>
+<div align="center">
+
+# squad
+
+</div>
 
 <p align="center">
   A role system for AI agents.<br>
