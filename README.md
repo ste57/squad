@@ -10,15 +10,11 @@ Squad is a role system for AI agents. One role, every project.
 
 Tell Claude Code:
 
-```
-Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
-```
+> Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
 
 Then:
 
-```
-/squad
-```
+> /squad
 
 <br>
 
@@ -31,6 +27,10 @@ Squad has three layers:
 **DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
 
 **Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
+
+```
+seed → DNA → project
+```
 
 Each layer adds specificity. No layer overrides the one above it.
 
@@ -56,14 +56,20 @@ A specialist is an agent you bring in. A tool is a process you follow — a comm
 
 Beyond the built-in roles, you can create your own:
 
-```
-/squad create     Describe what you need
-/squad edit       Modify any custom role or specialist
-/squad delete     Remove one
-```
+> /squad create
+
+Tell Claude what you need. It figures out the type, creates the file, and tells you how to use it.
 
 > I need someone who reviews security for the engineer role
 
 Claude creates the specialist. Use `/squad engineer/security` to run it.
+
+> /squad edit
+
+Modify any custom role or specialist.
+
+> /squad delete
+
+Remove one.
 
 Custom roles stay local to you.
