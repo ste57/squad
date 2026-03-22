@@ -22,12 +22,13 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → use the Glob tool (not Bash, not ls) to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Before presenting, read the current project's `.squad/config.md` (if it exists) to infer which role best fits the project. Only read files inside `.squad/` — do not scan the project's source files. Mark that role with a *. Do not narrate what you are doing — go straight to presenting the roles. No preamble, no "let me discover roles", no explanation. Just show the menu. From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present exactly like this:
+- `/squad` (no argument) → use the Glob tool (not Bash, not ls) to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Before presenting, read the current project's `.squad/config.md` (if it exists) to infer which role best fits the project. Only read files inside `.squad/` — do not scan the project's source files. Append a ⭐ at the end of that role's description. Do not narrate what you are doing — go straight to presenting the roles. No preamble, no "let me discover roles", no explanation. Just show the menu. From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present exactly like this:
 
-  > - **Engineer** — Builds and ships code.
-  > - **Writer** — Writes docs, READMEs, and copy.
+  > *Engineer* — Builds and ships code.
   >
-  > What are you working on?
+  > *Writer* — Writes docs, READMEs, and copy.
+  >
+  > *What are you working on?*
 
 Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
