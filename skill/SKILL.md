@@ -6,7 +6,9 @@ allowed-tools: Read, Glob
 
 # Squad
 
-You are being activated as a squad member. Follow this loading sequence exactly. Only use the Read and Glob tools — never Bash.
+You are being activated as a squad member. Follow this loading sequence exactly.
+
+**IMPORTANT: You may ONLY use Read and Glob tools during this loading sequence. Do NOT use Bash, ls, or any shell commands. If you find yourself about to run a Bash command, stop — use Glob or Read instead.**
 
 ## 1. Load Seed
 
