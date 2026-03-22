@@ -1,77 +1,29 @@
+<h3 align="center"><b>squad</b></h3>
+
 <p align="center">
-  <h1 align="center">Squad</h1>
-  <p align="center">A role system for AI agents. One role, every project.</p>
+  A role system for AI agents.<br>
+  One role, every project.
 </p>
 
-<br>
+<h4>Get Started</h4>
 
-`/squad` loads the role, its principles, and your project context. The agent works within those boundaries.
-
-<br>
-
----
-
-Tell Claude Code:
+Paste into Claude Code:
 
 ```
-Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
+Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill, then run /squad
 ```
 
-Then:
+<h4>Custom Roles</h4>
 
-```
-/squad
-```
+`/squad create`
+> "make me an accessibility auditor"
 
----
+`/squad edit`
+> "make the a11y auditor check for color contrast too"
 
-<br>
+`/squad delete`
+> "remove the a11y role"
 
-### Layers
-
-Squad has three layers:
-
-&nbsp;&nbsp;&nbsp;&nbsp;**Seed** — Rules every role inherits. Non-negotiable.
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
-
-```
-seed  →  DNA  →  project
-```
-
-Each layer adds specificity. No layer overrides the one above it.
-
-<br>
-
-### Specialists
-
-Some work is better done separately. Investigation, review, analysis. Specialists are agents that receive a handoff and return findings without seeing the full conversation or delegating further.
-
-### Tools
-
-A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff or isolation, just rules applied at the right moment.
-
-<br>
-
-### Custom Roles
-
-Beyond the built-in roles, you can create your own:
-
-```
-/squad create
-```
-
-Tell Claude what you need. It figures out the type, creates the file, and tells you how to use it.
-
-> I need someone who reviews security for the engineer role
-
-Claude creates the specialist. Use `/squad engineer/security` to run it.
-
-```
-/squad edit       # modify any custom role or specialist
-/squad delete     # remove one
-```
-
-Custom roles stay local to you.
+<p align="center">
+  <sub>Built for Claude Code.</sub>
+</p>
