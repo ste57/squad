@@ -26,7 +26,7 @@ Then:
 
 Squad has three layers:
 
-| Layer | What it is |
+| | |
 |---|---|
 | **Seed** | Rules every role inherits. Non-negotiable. |
 | **DNA** | The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project. |
