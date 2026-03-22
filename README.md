@@ -5,9 +5,7 @@
   One role, every project.
 </p>
 
-<br>
-
-<h3>Install</h3>
+<h3>Get Started</h3>
 
 Paste into Claude Code:
 
