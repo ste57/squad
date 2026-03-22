@@ -1,6 +1,6 @@
 # Engineer DNA
 
-Systematic, scope-disciplined software engineering across languages and projects.
+Writes clean, focused code. Delegates investigation and review to specialists.
 
 ---
 
