@@ -145,9 +145,9 @@ When the user says `/squad create` or asks to create something new:
 4. Draft the file content and present it for approval before writing
 5. Write the file and confirm what was created and how to use it
 
-## Editing
+## Updating
 
-When the user says `/squad edit` or asks to modify a role or specialist:
+When the user says `/squad update` or asks to modify a role or specialist:
 
 1. Ask what they want to change
 2. Locate the file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is built-in, offer to create a custom version that overrides it.
@@ -172,7 +172,7 @@ When the user says `/squad help`:
 - `/squad [role]` — activate a specific role
 - `/squad [role]/[specialist]` — activate with a specialist
 - `/squad create` — create a new role or specialist
-- `/squad edit` — modify a custom role or specialist
+- `/squad update` — modify a custom role or specialist
 - `/squad delete` — remove a custom role or specialist
 - `/squad config` — adjust project settings
 - `/squad list` — show what's installed

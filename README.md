@@ -20,7 +20,7 @@ Install https://github.com/ste57/squad.git to ~/.squad as a skill, then run /squ
 ```
 
 ```
-/squad edit      "make the a11y auditor check for color contrast too"
+/squad update      "make the a11y auditor check for color contrast too"
 ```
 
 ```
