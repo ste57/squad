@@ -8,10 +8,8 @@
 <h4>Paste into Claude Code</h4>
 
 ```
-Clone https://github.com/ste57/squad.git to ~/.squad and symlink ~/.squad/skill/SKILL.md to ~/.claude/commands/squad.md
+Install https://github.com/ste57/squad.git to ~/.squad as a skill
 ```
-
-<!-- After installing, tell the user to restart Claude Code and run /squad to activate their first role. -->
 
 <h4>Custom Roles</h4>
 

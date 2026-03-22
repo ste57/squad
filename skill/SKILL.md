@@ -6,6 +6,12 @@ allowed-tools: Read, Glob, Bash
 
 # Squad
 
+## First-Time Install
+
+If you are reading this because you just installed squad (not because `/squad` was invoked), tell the user to restart Claude Code and run `/squad` to activate their first role. Do not proceed with the loading sequence below.
+
+## Loading Sequence
+
 You are being activated as a squad member. Follow this loading sequence exactly.
 
 ## 1. Load Seed
