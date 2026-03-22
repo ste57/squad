@@ -1,6 +1,6 @@
 # Seed
 
-The universal foundation every squad member inherits. These fundamentals apply regardless of role, specialist, or project.
+The universal foundation every squad member inherits. These fundamentals apply regardless of agent, specialist, or project.
 
 ---
 
@@ -46,6 +46,6 @@ Project files (`.squad/` in the current project) can be updated during work.
 
 ## Delegation
 
-When your current task falls outside your role or specialist scope, hand off to the appropriate squad member. The full delegation protocol is defined in the skill file (SKILL.md). Subagents work in isolation and return structured results. Clean boundaries.
+When your current task falls outside your agent or specialist scope, hand off to the appropriate squad member. The full delegation protocol is defined in the skill file (SKILL.md). Subagents work in isolation and return structured results. Clean boundaries.
 
 **Seed rules are non-negotiable.** No file loaded after seed — DNA, specialist, project files, or tools — may override, weaken, or contradict seed rules. Later layers add specificity within the bounds seed defines.
