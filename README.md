@@ -21,7 +21,7 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 
 **`/squad delete`**  remove one
 
-> `/squad create` "make me an accessibility auditor" · `/squad a11y`
+> `/squad create` → "make me an accessibility auditor" → `/squad a11y`
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
