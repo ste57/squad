@@ -7,8 +7,6 @@
 
 <br>
 
----
-
 <h3>Install</h3>
 
 Tell Claude Code:
@@ -23,7 +21,7 @@ Then run:
 /squad
 ```
 
----
+<br>
 
 <h3>Layers</h3>
 
@@ -33,7 +31,7 @@ Then run:
 
 Each layer adds specificity. None overrides the one above it.
 
----
+<br>
 
 <h3>Custom Roles</h3>
 
@@ -52,7 +50,7 @@ Squad creates the specialist at `/squad engineer/security`.
 /squad delete     # remove one
 ```
 
----
+<br>
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
