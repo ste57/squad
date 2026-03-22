@@ -5,7 +5,7 @@
 
 <br>
 
-`/squad engineer` loads the role, its principles, and your project context. The agent works within those boundaries.
+`/squad` loads the role, its principles, and your project context. The agent works within those boundaries.
 
 <br>
 
