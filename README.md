@@ -20,17 +20,17 @@ On first run in a project, squad scaffolds `.squad/` with project-specific files
 
 ## How It Works
 
-Context loads in layers: **seed** (universal rules) → **DNA** (function principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities).
+Context loads in layers: **seed** (universal rules) → **DNA** (role principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities).
 
 Specialists run as isolated subagents. The parent builds the context stack, spawns the specialist, and validates its output. Subagents do not delegate further.
 
-A directory is a function if it contains `dna.md`.
+A directory is a role if it contains `dna.md`.
 
 ## Extending
 
-Add a specialist to an existing function at `~/.squad/engineer/custom/deploy.md` and invoke it as `/squad engineer/deploy`. Create a new function by adding a directory with a `dna.md` to `~/.squad/custom/`. Custom paths are gitignored.
+Add a specialist to an existing role at `~/.squad/engineer/custom/deploy.md` and invoke it as `/squad engineer/deploy`. Create a new role by adding a directory with a `dna.md` to `~/.squad/custom/`. Custom paths are gitignored.
 
-**Example: creating a writer function**
+**Example: creating a writer role**
 
 `~/.squad/custom/writer/dna.md`
 ```markdown

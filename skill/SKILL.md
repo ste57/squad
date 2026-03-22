@@ -1,6 +1,6 @@
 ---
 name: squad
-description: Dispatch specialist AI agent personalities. Invoke with /squad [function] or /squad [function]/[specialist] (e.g. /squad engineer, /squad engineer/triage).
+description: Dispatch specialist AI agent personalities. Invoke with /squad [role] or /squad [role]/[specialist] (e.g. /squad engineer, /squad engineer/triage).
 ---
 
 # Squad
@@ -13,19 +13,19 @@ Read `~/.squad/seed.md` in full. This is your seed — the universal foundation 
 
 If `~/.squad/seed.md` does not exist, stop. Tell the user squad is not installed and provide setup instructions.
 
-## 2. Identify Function and Specialist
+## 2. Identify Role and Specialist
 
 Parse the invocation argument:
 
-- `/squad engineer` → function = `engineer`, no specialist
-- `/squad engineer/triage` → function = `engineer`, specialist = `triage`
-- `/squad` (no argument) → ask the user which function to activate
+- `/squad engineer` → role = `engineer`, no specialist
+- `/squad engineer/triage` → role = `engineer`, specialist = `triage`
+- `/squad` (no argument) → ask the user which role to activate
 
-Read `~/.squad/[function]/dna.md`. This is your DNA, layered on top of seed.
+Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
 
-If `~/.squad/[function]/dna.md` does not exist, check `~/.squad/custom/[function]/dna.md`. If still not found, tell the user that function is not installed and list available functions. A directory is a function if it contains a `dna.md` file — ignore directories like `templates/` that do not.
+If `~/.squad/[role]/dna.md` does not exist, check `~/.squad/custom/[role]/dna.md`. If still not found, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
-If a specialist was specified, read `~/.squad/[function]/[specialist].md`. If not found, check `~/.squad/[function]/custom/`. If still not found, tell the user and list available specialists for that function.
+If a specialist was specified, read `~/.squad/[role]/[specialist].md`. If not found, check `~/.squad/[role]/custom/`. If still not found, tell the user and list available specialists for that role.
 
 ## 3. Load Project Files
 
@@ -36,7 +36,7 @@ Check if `.squad/` exists in the current working directory.
 - Read `.squad/style.md` for conventions (skip if missing)
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
-- For each active tool listed in config, read `~/.squad/[function]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
+- For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
 
 **If it does not exist:**
 - Tell the user: "No .squad/ found in this project. Want me to set it up?"
@@ -46,7 +46,7 @@ Check if `.squad/` exists in the current working directory.
 ## 4. Confirm Activation
 
 After loading all layers, briefly confirm to the user:
-- Which function and specialist are active
+- Which role and specialist are active
 - Current working directory
 - Which project files were loaded (or that none were found)
 - Which tools are active (if any)
@@ -65,9 +65,9 @@ seed (absolute) → DNA → specialist → project files (config, style, context
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Read the specialist's file** — check `~/.squad/[function]/` then `~/.squad/[function]/custom/` to find it. A directory is a function if it contains `dna.md`. Read the specialist's input spec to know what format it expects.
+1. **Read the specialist's file** — check `~/.squad/[role]/` then `~/.squad/[role]/custom/` to find it. A directory is a role if it contains `dna.md`. Read the specialist's input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent is a fresh agent that receives:
-   - `~/.squad/seed.md` and `~/.squad/[function]/dna.md` for foundation
+   - `~/.squad/seed.md` and `~/.squad/[role]/dna.md` for foundation
    - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
    - The handoff summary structured according to the specialist's input spec
@@ -93,11 +93,11 @@ When `.squad/` doesn't exist and the user wants to set up:
 
 1. Create the `.squad/` directory in the current project root
 2. Read each template from `~/.squad/templates/` and write a copy into `.squad/`:
-   - `config.md` — replace the function comment with the actual function name from the current invocation (e.g. `engineer`)
+   - `config.md` — replace the role comment with the actual role name from the current invocation (e.g. `engineer`)
    - `style.md` — copy as-is
    - `context.md` — copy as-is
    - `intel.md` — copy as-is
-3. List the contents of `~/.squad/[function]/tools/` to find available tools. If the directory doesn't exist, skip to step 7
+3. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7
 4. Read each tool file and present the tool name and its first-line description to the user
 5. Ask which tools to enable
 6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
@@ -110,5 +110,5 @@ When `.squad/` doesn't exist and the user wants to set up:
 When the user says `/squad config` or asks to adjust settings:
 - If `.squad/` doesn't exist, run the scaffolding flow above
 - If it exists, read `.squad/config.md` and present current settings
-- Let the user enable/disable tools, change default function, or adjust settings
+- Let the user enable/disable tools, change default role, or adjust settings
 - Save changes to `.squad/config.md`
