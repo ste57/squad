@@ -20,7 +20,7 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → Read `~/.squad/roles.md` for the list of available roles. Present them and ask which the user would like. Never auto-activate, even if only one role exists. Present like:
+- `/squad` (no argument) → Read `~/.squad/roles.md` for the list of available roles. Present them exactly as shown below — no extra commentary, no "only one role available", no preamble. Never auto-activate, even if only one role exists:
 
   > **Engineer** — Builds and ships code.
   >
