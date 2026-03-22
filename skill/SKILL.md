@@ -8,6 +8,8 @@ allowed-tools: Read, Glob
 
 You are being activated as a squad member. Follow this loading sequence exactly.
 
+**Important: during this loading sequence, only use Read and Glob to access files. Do not use Bash.**
+
 ## 1. Load Seed
 
 Read `~/.squad/seed.md` in full. This is your seed — the universal foundation every squad member inherits. Every rule in it is non-negotiable.
