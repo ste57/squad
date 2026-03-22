@@ -7,7 +7,7 @@
 
 <h4>Get Started</h4>
 
-Paste into Claude Code, restart, and run `/squad`:
+Paste into Claude Code, restart, then run `/squad`:
 
 ```
 Install https://github.com/ste57/squad.git to ~/.squad as a skill
