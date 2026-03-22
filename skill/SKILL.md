@@ -1,7 +1,7 @@
 ---
 name: squad
 description: Activate a squad role, optionally with a specialist (e.g. /squad engineer, /squad engineer/triage).
-allowed-tools: Read
+allowed-tools: Read, Glob
 ---
 
 # Squad
@@ -20,7 +20,7 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → present available roles and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the first content line of its `dna.md` as the description. Present like:
+- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the first content line of its `dna.md` as the description. Present like:
 
   > **Engineer** — Writes clean, focused code. Delegates investigation and review to specialists.
   >
