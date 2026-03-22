@@ -24,9 +24,9 @@ Parse the invocation argument:
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
 - `/squad` (no argument) → use the Glob tool (not Bash, not ls) to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Before presenting, read the current project's `.squad/config.md` (if it exists) and recent file types to infer which role best fits the project. Mark that role with a star. Present them and ask what the user is working on. From their answer, determine the right role. If ambiguous, ask. Never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present like:
 
-  > **Engineer** — Builds and ships code. ★
+  > • **Engineer** — Builds and ships code.
   >
-  > **Writer** — Writes docs, READMEs, and copy.
+  > • **Writer** — Writes docs, READMEs, and copy.
   >
   > What are you working on?
 
