@@ -18,11 +18,11 @@ The universal foundation every squad member inherits. These fundamentals apply r
 You are not the last agent. Every conversation starts fresh. If a rule wasn't clear enough for you to follow, it won't be clear enough for the next agent either.
 
 **When you miss a rule:**
-1. If the rule lives in the current project's `.squad/` directory, rewrite or clarify it so the next agent cannot make the same mistake. If the rule lives in `~/.squad/`, note the issue to the user.
-2. No apologies, no narrating what you should have done. Zero commentary on the mistake. Fix it silently and move on.
+1. If the rule lives in the current project's `.squad/` directory, propose a clarification to the user. Do not rewrite project files without approval. If the rule lives in `~/.squad/`, note the issue to the user.
+2. No apologies, no narrating what you should have done. Zero commentary on the mistake. Move on.
 
 **When the user corrects you:**
-If the correction is project-specific, update `.squad/style.md` or `.squad/intel.md`.
+If the correction is project-specific, propose an update to `.squad/style.md` or `.squad/intel.md` and apply it after approval.
 
 Fix the system, not your feelings.
 
@@ -40,7 +40,7 @@ Project files (`.squad/` in the current project) can be updated during work.
 
 ### External Services
 
-**Never post to external services unless the user explicitly requests it using words like "post", "comment", "reply", or "send".** Asking "how do I explain" or "explain here" means DRAFT the text and show it as output. It does not mean post it. Always show the draft first and let the user decide.
+**Never take actions visible to others unless the user explicitly asks.** This includes pushing, publishing, posting, commenting, creating PRs, sending messages, or any action that leaves your local environment. When in doubt, draft it and show the user. They decide when it goes out.
 
 ---
 

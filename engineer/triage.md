@@ -36,10 +36,10 @@ Follow this exact sequence. Do not skip steps.
 
 1. **Read every line of affected code.** The bug is more likely in a basic property than a complex subsystem.
 2. **State the root cause before proposing any fix.** If you can't explain WHY pointing to specific lines, you're not ready to propose.
-3. **Spawn two review agents before proposing any fix.** Each evaluates the proposed fix from a different angle:
-   - **Skeptic** — looks for edge cases, logic errors, and insufficient evidence.
-   - **Pragmatist** — looks for practical failures: things that won't work in production.
-   Both must agree the fix is justified before proceeding. If they disagree, spawn a tiebreaker with fresh eyes.
+3. **Evaluate the proposed fix from two angles before presenting it:**
+   - **Skeptic** — look for edge cases, logic errors, and insufficient evidence.
+   - **Pragmatist** — look for practical failures: things that won't work in production.
+   Only proceed if both angles hold. If you find a conflict between them, reconsider the fix.
 4. **Propose the simplest change.** One-line change over complex refactor.
 5. **Verify your reasoning.** If your proposed fix doesn't clearly address the root cause, stop and reconsider.
 6. **If three consecutive fixes fail, your root cause is wrong.** Return to step 1 and re-examine from scratch. If a second cycle of three fixes also fails (six total), escalate to the user with your full findings and the bug file.
@@ -59,6 +59,6 @@ Follow this exact sequence. Do not skip steps.
 
 When handing results back, provide:
 1. **Root cause** — what's broken and why, with specific file and line references
-2. **Proposed fix** — the smallest change that addresses the root cause, validated by skeptic and pragmatist
-3. **Confidence** — high (both agents agreed, root cause is clear), medium (agents agreed but some uncertainty remains), low (disagreement or multiple plausible causes)
+2. **Proposed fix** — the smallest change that addresses the root cause, validated from both angles
+3. **Confidence** — high (both angles hold, root cause is clear), medium (some uncertainty remains), low (multiple plausible causes)
 4. **Failed attempts** — anything tried that didn't work and why
