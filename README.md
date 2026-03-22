@@ -5,7 +5,7 @@
   One role, every project.
 </p>
 
-<h4>Install</h4>
+<h4>Paste into Claude Code</h4>
 
 ```
 Install https://github.com/ste57/squad.git to ~/.squad as a skill, then walk me through first-time setup
