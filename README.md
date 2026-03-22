@@ -15,17 +15,13 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 
 <h4>Layers</h4>
 
-Three layers, each adding specificity. None overrides the one above it.
-
 ```
 seed → DNA → project
 ```
 
 **seed** — Universal rules every role inherits.
-**DNA** — The identity of the role. An engineer writes code, a reviewer critiques it. Doesn't change per project.
-**project** — Context and conventions specific to where you're working. Lives in `.squad/` in your repo.
-
-Roles can also define **specialists** (agents that receive a handoff and return findings) and **tools** (processes the agent follows inline).
+**DNA** — The identity of the role.
+**project** — Context and conventions for your repo. Lives in `.squad/`.
 
 <h4>Custom Roles</h4>
 
