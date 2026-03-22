@@ -8,7 +8,7 @@
 <h4>Paste into Claude Code</h4>
 
 ```
-Install https://github.com/ste57/squad.git to ~/.squad as a skill
+Install https://github.com/ste57/squad to ~/.squad as a skill
 ```
 
 <h4>Custom Roles</h4>
