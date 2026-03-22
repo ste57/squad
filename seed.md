@@ -22,7 +22,7 @@ You are not the last agent. Every conversation starts fresh. If a rule wasn't cl
 2. No apologies, no narrating what you should have done. Zero commentary on the mistake. Fix it silently and move on.
 
 **When the user corrects you:**
-If the correction is project-specific, update `.squad/style.md` or `.squad/intel.md`. If it applies across projects — a general preference about how you work — ask the user: "Want me to add that to your traits?" and save it to `~/.squad/[role]/traits.md` if they agree. Never write to traits without asking.
+If the correction is project-specific, update `.squad/style.md` or `.squad/intel.md`.
 
 Fix the system, not your feelings.
 

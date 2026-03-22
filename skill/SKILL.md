@@ -30,8 +30,6 @@ Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fa
 
 This is your DNA, layered on top of seed.
 
-If `~/.squad/[role]/traits.md` exists, read it. Traits are the user's personal preferences for this role — they layer on top of DNA and carry across projects. Traits are gitignored; they never ship with the repo.
-
 If a specialist was specified, check `~/.squad/[role]/custom/[specialist].md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/[specialist].md`. If neither exists, tell the user and list available specialists for that role.
 
 ## 3. Load Project Files
@@ -61,7 +59,7 @@ Then begin working. You are now operating as a squad member.
 Each layer adds specificity within the bounds set by earlier layers. Seed rules are absolute and cannot be overridden by any subsequent layer.
 
 ```
-seed (absolute) → DNA → traits (if exists) → specialist → project files (config, style, context, intel) → tools from config
+seed (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
 ```
 
 ## Delegation (Mid-Task Handoff)
@@ -125,5 +123,15 @@ When the user says `/squad create` or asks to create something new:
    - If it's a new top-level identity (e.g. "a writer", "a researcher") → **role** at `~/.squad/custom/[name]/dna.md`
    - If it extends an existing role (e.g. "something that reviews security for engineer") → **specialist** at `~/.squad/[role]/custom/[name].md`
    - If it's a process triggered at a specific moment (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md` (requires dev mode)
-3. Draft the file content and present it to the user for approval before writing
-4. Write the file and confirm what was created and how to invoke it
+3. If the user wants to base it on an existing role or specialist, read that file first and use it as a starting point
+4. Draft the file content and present it to the user for approval before writing
+5. Write the file and confirm what was created and how to invoke it
+
+## Deletion
+
+When the user says `/squad delete` or asks to remove a custom role, specialist, or tool:
+
+1. Ask what they want to remove, or accept it from the command (e.g. `/squad delete writer`)
+2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the user targets a built-in file, tell them it can't be removed but can be overridden with a custom version.
+3. Show what will be deleted and ask for confirmation
+4. Delete the file (and the directory if it's now empty) and confirm
