@@ -7,13 +7,11 @@
 
 <h4>Get Started</h4>
 
-Paste into Claude Code:
+Paste into Claude Code, restart, and run `/squad`:
 
 ```
 Install https://github.com/ste57/squad.git to ~/.squad as a skill
 ```
-
-Restart and run `/squad`.
 
 <h4>Custom Roles</h4>
 
