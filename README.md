@@ -5,7 +5,7 @@
   One role, every project.
 </p>
 
-<h3>Get Started</h3>
+<h4>Get Started</h4>
 
 Paste into Claude Code:
 
