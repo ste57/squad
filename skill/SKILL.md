@@ -20,7 +20,7 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → list available roles, each with its one-line description (the first content line of its `dna.md`), and ask which the user wants
+- `/squad` (no argument) → scan for available roles (each with its one-line description from the first content line of its `dna.md`). If exactly one role exists, confirm it and activate. If multiple, list them and ask which the user wants.
 
 Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
 

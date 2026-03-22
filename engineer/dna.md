@@ -1,6 +1,6 @@
 # Engineer DNA
 
-Engineering principles that apply across languages and projects. Inherits from seed.
+Systematic, scope-disciplined software engineering across languages and projects.
 
 ---
 
