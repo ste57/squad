@@ -62,13 +62,11 @@ Check if `.squad/` exists in the current working directory.
 - For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user and continue without it.
 
 **If it does not exist:**
-- Fold the scaffolding offer into the activation confirmation (step 4). Do not ask separately.
+- After the user tells you what they want to work on and you've selected a role, automatically scaffold `.squad/` and populate it with project context. Read the project's structure, README, and key files to fill in `.squad/context.md`. Do not ask — just configure it.
 
 ## 4. Confirm Activation
 
-After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing. If `.squad/` wasn't found, combine the offer:
-
-  > **Engineer** ready. This project doesn't have squad files yet — want me to set those up, or just dive in?
+After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing.
 
 Then begin working. You are now operating as a squad member.
 
@@ -108,7 +106,7 @@ When you discover a non-obvious behavior, pattern, or trap during work, append i
 
 ## Scaffolding
 
-When `.squad/` doesn't exist and the user wants to set up:
+When `.squad/` doesn't exist and you need to set up:
 
 1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user and suggest `/squad config` instead.
 2. Read each template from `~/.squad/templates/` and write a copy into `.squad/`:
@@ -116,13 +114,12 @@ When `.squad/` doesn't exist and the user wants to set up:
    - `style.md` — copy as-is
    - `context.md` — copy as-is
    - `intel.md` — copy as-is
-3. Ask the user if they'd like to populate `.squad/style.md` or `.squad/context.md` now. These start empty and are most useful when filled in.
+3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with a brief description of the project, its tech stack, and any relevant domain context.
 4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
-5. Read each tool file and present the tool name and its first-line description
-6. Ask which tools to enable
-7. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
-8. Tell the user setup is complete and list what was created
-9. Load the enabled tools and continue operating
+5. Read each tool file. Enable tools that are relevant to the project based on what you learned in step 3.
+6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
+7. Tell the user setup is complete and list what was created
+8. Load the enabled tools and continue operating
 
 ## Configuration
 
