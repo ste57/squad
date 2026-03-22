@@ -22,11 +22,11 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present like:
+- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask what the user is working on. From their answer, determine the right role. If ambiguous, ask. Never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present like:
 
   > **Engineer** — Builds and ships code.
   >
-  > Which role would you like?
+  > What are you working on?
 
 Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
