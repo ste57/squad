@@ -7,8 +7,6 @@
 
 ---
 
-`/squad` loads the role, its principles, and your project context. The agent works within those boundaries.
-
 ## Install
 
 Tell Claude Code:
