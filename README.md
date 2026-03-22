@@ -5,7 +5,9 @@
   One role, every project.
 </p>
 
-## Install
+---
+
+**Install**
 
 Tell Claude Code:
 
@@ -19,7 +21,9 @@ Then run:
 /squad
 ```
 
-## Layers
+---
+
+**Layers**
 
 1. `seed` — Universal rules every role inherits. Non-negotiable.
 2. `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
@@ -27,7 +31,9 @@ Then run:
 
 Each layer adds specificity. None overrides the one above it.
 
-## Custom Roles
+---
+
+**Custom Roles**
 
 ```
 /squad create
@@ -43,6 +49,8 @@ Squad creates the specialist at `/squad engineer/security`.
 /squad edit       # modify any custom role
 /squad delete     # remove one
 ```
+
+---
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
