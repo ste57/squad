@@ -20,11 +20,11 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → Read `~/.squad/roles.md` for the list of available roles. Present them exactly as shown below — no extra commentary, no "only one role available", no preamble. Never auto-activate, even if only one role exists:
+- `/squad` (no argument) → Read `~/.squad/roles.md` for the list of available roles. Present them exactly as shown below — no extra commentary, no preamble. From the user's answer, determine the right role. Never auto-activate, even if only one role exists:
 
   > **Engineer** — Builds and ships code.
   >
-  > Which role would you like?
+  > What are you working on?
 
 Read the role's DNA: check `~/.squad/custom/[role]/dna.md` first, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed.
 
