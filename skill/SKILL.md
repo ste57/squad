@@ -26,14 +26,21 @@ Parse the invocation argument:
   1. Glob for `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`
   2. Read `.squad/config.md` in the current project (if it exists) to infer which role best fits. Only read files inside `.squad/`.
   3. For each role, read the `description` field from its `dna.md` frontmatter.
+  4. If `.squad/context.md` exists, read the first line for a brief project description.
 
   **Present the menu directly — no preamble:**
 
-  Start with the current working directory followed by config status: `~/path/to/project · ready` if `.squad/` exists in the project, or `~/path/to/project · not configured` if it doesn't.
+  Format:
 
-  Then each role as: `` > `RoleName:` *description* `✦` ``
+  **~/path/to/project** • *brief project description from context.md* (or *not configured* if no `.squad/`)
 
-  The recommended role gets `✦` after its description. Role names use backticks, descriptions in italic. Put a blank `>` line between each role for spacing. End with What do you want to work on? outside the blockquote. From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate.
+  > `RoleName:` *description* `✦`
+  >
+  > `RoleName:` *description*
+
+  Ask the user what they want to work on.
+
+  From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate.
 
 **Loading the role:**
 
