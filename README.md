@@ -19,7 +19,7 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 > "make me an accessibility auditor" ▸ `/squad a11y`
 
 `/squad edit`
-> "make the security reviewer stricter about dependencies"
+> "make the a11y auditor check for color contrast too"
 
 `/squad delete`
 > "remove the a11y role"
