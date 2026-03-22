@@ -1,14 +1,12 @@
 ---
 name: squad
 description: Activate a squad role, optionally with a specialist (e.g. /squad engineer, /squad engineer/triage).
-allowed-tools: Read, Glob
+allowed-tools: Read, Glob, Bash
 ---
 
 # Squad
 
 You are being activated as a squad member. Follow this loading sequence exactly.
-
-**IMPORTANT: You may ONLY use Read and Glob tools during this loading sequence. Do NOT use Bash, ls, or any shell commands. If you find yourself about to run a Bash command, stop — use Glob or Read instead.**
 
 ## 1. Load Seed
 
@@ -22,19 +20,28 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → use the Glob tool (not Bash, not ls) to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Before presenting, read the current project's `.squad/config.md` (if it exists) to infer which role best fits the project. Only read files inside `.squad/` — do not scan the project's source files. Append a ⭐ at the end of that role's description. Do not narrate what you are doing — go straight to presenting the roles. No preamble, no "let me discover roles", no explanation. Just show the menu. From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present exactly like this:
+- `/squad` (no argument) → discover available roles silently, then present them. No narration during discovery.
 
-  > **Engineer** — Builds and ships code.
-  >
-  > **Writer** — Writes docs, READMEs, and copy.
-  >
-  > What are you working on?
+  **Discovery (silent):**
+  1. Glob for `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`
+  2. Read `.squad/config.md` in the current project (if it exists) to infer which role best fits. Only read files inside `.squad/`.
+  3. For each role, read the `description` field from its `dna.md` frontmatter.
 
-Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
+  **Present the menu directly — no preamble:**
 
-This is your DNA, layered on top of seed.
+  Start with the current working directory followed by config status: `~/path/to/project · ready` if `.squad/` exists in the project, or `~/path/to/project · not configured` if it doesn't.
 
-If a specialist was specified, check `~/.squad/[role]/custom/[specialist].md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/[specialist].md`. If neither exists, tell the user and list available specialists for that role.
+  Then each role as: `` > `RoleName:` *description* `✦` ``
+
+  The recommended role gets `✦` after its description. Role names use backticks, descriptions in italic. Put a blank `>` line between each role for spacing. End with What do you want to work on? outside the blockquote. From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate.
+
+**Loading the role:**
+
+Check `~/.squad/custom/[role]/dna.md` first, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user and list available roles. A directory is a role if it contains `dna.md`.
+
+If `~/.squad/[role]/traits.md` exists, read it. Traits are personal preferences for this role — they layer on top of DNA and carry across projects.
+
+If a specialist was specified, check `~/.squad/[role]/custom/[specialist].md` first, fall back to `~/.squad/[role]/[specialist].md`. If neither exists, tell the user and list available specialists.
 
 ## 3. Load Project Files
 
@@ -45,14 +52,14 @@ Check if `.squad/` exists in the current working directory.
 - Read `.squad/style.md` for conventions (skip if missing)
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
-- For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
+- For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user and continue without it.
 
 **If it does not exist:**
 - Fold the scaffolding offer into the activation confirmation (step 4). Do not ask separately.
 
 ## 4. Confirm Activation
 
-After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing — don't list absent files. If `.squad/` wasn't found, combine the offer into a single question, like:
+After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing. If `.squad/` wasn't found, combine the offer:
 
   > **Engineer** ready. This project doesn't have squad files yet — want me to set those up, or just dive in?
 
@@ -71,20 +78,20 @@ seed (absolute) → DNA → specialist → project files (config, style, context
 When a squad member needs to delegate to a specialist during work:
 
 1. **Read the specialist's file** — check `~/.squad/[role]/custom/` first, then `~/.squad/[role]/`. Read the specialist's input spec to know what format it expects.
-2. **Spawn a subagent** — the subagent is a fresh agent that receives:
+2. **Spawn a subagent** — the subagent receives:
    - `~/.squad/seed.md` and `~/.squad/[role]/dna.md` for foundation
    - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
    - The handoff summary structured according to the specialist's input spec
-3. **The subagent works in isolation** — it does not see the parent's full conversation. If the handoff is missing information the specialist needs, the subagent returns early stating what's missing rather than asking mid-task.
-4. **Subagents do not delegate further.** If a subagent's findings reveal additional work, it reports back to the parent agent, which decides the next action.
+3. **The subagent works in isolation** — it does not see the parent's full conversation. If the handoff is missing information, the subagent returns early stating what's missing.
+4. **Subagents do not delegate further.** They report back to the parent agent, which decides the next action.
 5. **Receive the result** — the subagent returns its findings following its return format
 6. **Validate** — check the result against the original request before continuing
-7. **Clean up** — if the specialist created temporary files (e.g. triage bug files), the delegating agent is responsible for cleanup after the work is confirmed complete
+7. **Clean up** — if the specialist created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
 
 ### Tool Protocols
 
-Tools are protocols loaded into the active squad member's context via config. The active agent retains control throughout — it follows the tool's protocol inline and owns the outcome. A tool may direct the agent to spawn helper agents (e.g., a review panel), but the agent orchestrates them as part of the protocol. This differs from specialist delegation, where the agent hands off control entirely.
+Tools are protocols the active agent follows inline. The agent retains control throughout and owns the outcome. A tool may direct the agent to spawn helper agents (e.g., a review panel), but the agent orchestrates them. This differs from specialist delegation, where the agent hands off control entirely.
 
 ---
 
@@ -96,15 +103,15 @@ When you discover a non-obvious behavior, pattern, or trap during work, append i
 
 When `.squad/` doesn't exist and the user wants to set up:
 
-1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user it's already set up and suggest `/squad config` instead.
+1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user and suggest `/squad config` instead.
 2. Read each template from `~/.squad/templates/` and write a copy into `.squad/`:
-   - `config.md` — replace the role comment with the actual role name from the current invocation (e.g. `engineer`)
+   - `config.md` — replace the role comment with the actual role name
    - `style.md` — copy as-is
    - `context.md` — copy as-is
    - `intel.md` — copy as-is
-3. Ask the user if they'd like to populate `.squad/style.md` (conventions) or `.squad/context.md` (project description) now. These start empty and are most useful when filled in. Tools depend on style.md, so populate it first.
-4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7
-5. Read each tool file and present the tool name and its first-line description to the user
+3. Ask the user if they'd like to populate `.squad/style.md` or `.squad/context.md` now. These start empty and are most useful when filled in.
+4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
+5. Read each tool file and present the tool name and its first-line description
 6. Ask which tools to enable
 7. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
 8. Tell the user setup is complete and list what was created
@@ -120,43 +127,40 @@ When the user says `/squad config` or asks to adjust settings:
 
 ## Creation
 
-When the user says `/squad create` or asks to create a new role or specialist:
+When the user says `/squad create` or asks to create something new:
 
 1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
 2. From their description, determine the type:
-   - If it's a new top-level identity (e.g. "a writer", "a researcher") → **role** at `~/.squad/custom/[name]/dna.md`
-   - If the user hands off work and waits for results (e.g. "something that reviews security for engineer") → **specialist** at `~/.squad/[role]/custom/[name].md`
-   - If the agent follows the steps itself and retains control (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md` (requires dev mode)
-3. If the user wants to base it on an existing role or specialist, read that file first and use it as a starting point
-4. Draft the file content and present it to the user for approval before writing
-5. Write the file and confirm what was created and how to invoke it
-6. If a new role was created, add it to `~/.squad/roles.md`
+   - New top-level identity (e.g. "a writer") → **role** at `~/.squad/custom/[name]/dna.md`
+   - Hands off work and waits for results (e.g. "something that reviews security") → **specialist** at `~/.squad/[role]/custom/[name].md`
+   - Agent follows the steps itself (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md`
+3. If the user wants to base it on an existing role or specialist, read that file first
+4. Draft the file content and present it for approval before writing
+5. Write the file and confirm what was created and how to use it
 
 ## Editing
 
 When the user says `/squad edit` or asks to modify a role or specialist:
 
-1. Ask what they want to change in plain language
-2. From their description, locate the relevant file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is a built-in file, tell them it can't be edited directly but offer to create a custom version that overrides it.
+1. Ask what they want to change
+2. Locate the file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is built-in, offer to create a custom version that overrides it.
 3. Read the current file and present it
-4. Discuss changes with the user, then propose the updated content
+4. Discuss changes, then propose the updated content
 5. Write the file after approval
 
 ## Deletion
 
 When the user says `/squad delete` or asks to remove a role or specialist:
 
-1. Ask what they want to remove in plain language
-2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the target is a built-in file, tell them it can't be removed but can be overridden with a custom version.
+1. Ask what they want to remove
+2. Locate the file — only custom files can be deleted. If the target is built-in, tell them it can't be removed but can be overridden.
 3. Show what will be deleted and ask for confirmation
 4. Delete the file (and the directory if it's now empty) and confirm
-5. If a role was deleted, remove it from `~/.squad/roles.md`
 
 ## Help
 
 When the user says `/squad help`:
 
-List available commands with a one-line description of each:
 - `/squad` — activate a role
 - `/squad [role]` — activate a specific role
 - `/squad [role]/[specialist]` — activate with a specialist
@@ -171,6 +175,6 @@ List available commands with a one-line description of each:
 
 When the user says `/squad list`:
 
-Read `~/.squad/roles.md` for available roles. For each role, use Glob to find its specialists and tools:
+Glob for available roles at `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`. For each role, find its specialists and tools:
 - **Specialists** — `~/.squad/[role]/*.md` and `~/.squad/[role]/custom/*.md` (exclude `dna.md`)
 - **Tools** — `~/.squad/[role]/tools/*.md`
