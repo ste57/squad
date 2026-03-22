@@ -5,13 +5,11 @@
   One role, every project.
 </p>
 
-<h4>Paste into Claude Code</h4>
+<h4>Paste into Claude Code · Restart · <code>/squad</code></h4>
 
 ```
 Install https://github.com/ste57/squad.git to ~/.squad as a skill
 ```
-
-Restart. Run `/squad`.
 
 <h4>Custom Roles</h4>
 
