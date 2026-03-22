@@ -5,12 +5,9 @@
   One role, every project.
 </p>
 
-<p align="center">
-  <code>/squad</code> loads the role, its principles, and your project context.<br>
-  The agent works within those boundaries.
-</p>
-
 ---
+
+`/squad` loads the role, its principles, and your project context. The agent works within those boundaries.
 
 ## Install
 
