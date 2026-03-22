@@ -5,8 +5,6 @@
   One role, every project.
 </p>
 
-<h4>Get Started</h4>
-
 Paste into Claude Code, restart, then run `/squad`:
 
 ```
