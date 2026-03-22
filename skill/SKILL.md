@@ -26,13 +26,13 @@ Parse the invocation argument:
   >
   > Which role would you like?
 
-Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
+Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
+
+This is your DNA, layered on top of seed.
 
 If `~/.squad/[role]/traits.md` exists, read it. Traits are the user's personal preferences for this role — they layer on top of DNA and carry across projects. Traits are gitignored; they never ship with the repo.
 
-If `~/.squad/[role]/dna.md` does not exist, check `~/.squad/custom/[role]/dna.md`. If still not found, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
-
-If a specialist was specified, read `~/.squad/[role]/[specialist].md`. If not found, check `~/.squad/[role]/custom/`. If still not found, tell the user and list available specialists for that role.
+If a specialist was specified, check `~/.squad/[role]/custom/[specialist].md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/[specialist].md`. If neither exists, tell the user and list available specialists for that role.
 
 ## 3. Load Project Files
 
@@ -68,7 +68,7 @@ seed (absolute) → DNA → traits (if exists) → specialist → project files 
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Read the specialist's file** — check `~/.squad/[role]/` then `~/.squad/[role]/custom/` to find it. A directory is a role if it contains `dna.md`. Read the specialist's input spec to know what format it expects.
+1. **Read the specialist's file** — check `~/.squad/[role]/custom/` first, then `~/.squad/[role]/`. A directory is a role if it contains `dna.md`. Read the specialist's input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent is a fresh agent that receives:
    - `~/.squad/seed.md` and `~/.squad/[role]/dna.md` for foundation
    - The specialist's file as its primary instructions
@@ -115,3 +115,15 @@ When the user says `/squad config` or asks to adjust settings:
 - If it exists, read `.squad/config.md` and present current settings
 - Let the user enable/disable tools, change default role, or adjust settings
 - Save changes to `.squad/config.md`
+
+## Creation
+
+When the user says `/squad create` or asks to create something new:
+
+1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
+2. From their description, determine the type:
+   - If it's a new top-level identity (e.g. "a writer", "a researcher") → **role** at `~/.squad/custom/[name]/dna.md`
+   - If it extends an existing role (e.g. "something that reviews security for engineer") → **specialist** at `~/.squad/[role]/custom/[name].md`
+   - If it's a process triggered at a specific moment (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md` (requires dev mode)
+3. Draft the file content and present it to the user for approval before writing
+4. Write the file and confirm what was created and how to invoke it
