@@ -16,15 +16,15 @@ Install https://github.com/ste57/squad.git to ~/.squad as a skill, then run /squ
 <h4>Custom Roles</h4>
 
 ```
-/squad create  "make me an accessibility auditor"
+/squad create      "make me an accessibility auditor"
 ```
 
 ```
-/squad update  "make the a11y auditor check for color contrast too"
+/squad update      "make the a11y auditor check for color contrast too"
 ```
 
 ```
-/squad delete  "remove the a11y role"
+/squad delete      "remove the a11y role"
 ```
 
 <p align="center">
