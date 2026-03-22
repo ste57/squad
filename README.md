@@ -1,64 +1,39 @@
 # Squad
 
-A framework for dispatching AI agent specialists with layered context, project memory, and delegation.
+Squad is a role system for AI agents. One role, every project.
+
+`/squad engineer` loads the role, its principles, and your project context. The agent works within those boundaries.
 
 ## Quick Start
 
-```bash
-git clone <repo-url> ~/Projects/squad
-ln -s ~/Projects/squad ~/.squad
-ln -s ~/Projects/squad/skill ~/.claude/skills/squad
+Tell Claude Code:
+
+> Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
+
+Then:
+
+> /squad
+
+## Layers
+
+Squad has three layers:
+
+**Seed** — Rules every role inherits. Non-negotiable.
+
+**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+
+**Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
+
+```
+seed → DNA → project
 ```
 
-```bash
-/squad engineer              # seed + engineer DNA
-/squad engineer/triage       # + triage specialist
-/squad engineer/review       # + review specialist
-```
+Each layer adds specificity. No layer overrides the one above it.
 
-On first run in a project, squad scaffolds `.squad/` with project-specific files (`config.md`, `style.md`, `context.md`, `intel.md`).
+## Specialists
 
-## How It Works
+Some work is better done separately. Investigation, review, analysis. Specialists are agents that receive a handoff and return findings without seeing the full conversation or delegating further.
 
-Context loads in layers: **seed** (universal rules) → **DNA** (role principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities).
+## Tools
 
-Specialists run as isolated subagents. The parent builds the context stack, spawns the specialist, and validates its output. Subagents do not delegate further.
-
-A directory is a role if it contains `dna.md`.
-
-## Extending
-
-Add a specialist to an existing role at `~/.squad/engineer/custom/deploy.md` and invoke it as `/squad engineer/deploy`. Create a new role by adding a directory with a `dna.md` to `~/.squad/custom/`. Custom paths are gitignored.
-
-**Example: creating a writer role**
-
-`~/.squad/custom/writer/dna.md`
-```markdown
-# Writer DNA
-
-- Write for clarity. Every sentence earns its place.
-- Match the voice defined in `.squad/style.md`.
-- Never publish without explicit user approval.
-```
-
-`~/.squad/custom/writer/editor.md`
-```markdown
-# Editor
-
-Revision specialist. Reviews a draft and returns structured feedback.
-
-## Input
-- **Draft** — the text to review
-- **Audience** — who will read it
-
-## Protocol
-1. Read the full draft before noting anything.
-2. Flag unclear passages with a specific rewrite suggestion.
-3. Check for consistency with `.squad/style.md`.
-
-## Return Format
-1. **Verdict** — ready / needs revision
-2. **Issues** — list with location, problem, and suggested fix
-```
-
-Invoke with `/squad writer/editor`.
+A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff or isolation, just rules applied at the right moment.
