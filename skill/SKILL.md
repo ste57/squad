@@ -20,13 +20,13 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → run `Glob("*/dna.md", path="~/.squad")` and `Glob("custom/*/dna.md", path="~/.squad")` to discover available roles. For each match, use Read to get the first content line of its `dna.md` as the description. Present the roles and ask which the user would like. Never auto-activate, even if only one role exists. Present like:
+- `/squad` (no argument) → Read `~/.squad/roles.md` for the list of available roles. Present them and ask which the user would like. Never auto-activate, even if only one role exists. Present like:
 
   > **Engineer** — Builds and ships code.
   >
-  > What are you working on?
+  > Which role would you like?
 
-Check `~/.squad/custom/[role]/dna.md` first. If it exists, use it. Otherwise, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
+Read the role's DNA: check `~/.squad/custom/[role]/dna.md` first, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user that role is not installed.
 
 This is your DNA, layered on top of seed.
 
@@ -126,6 +126,7 @@ When the user says `/squad create` or asks to create a new role or specialist:
 3. If the user wants to base it on an existing role or specialist, read that file first and use it as a starting point
 4. Draft the file content and present it to the user for approval before writing
 5. Write the file and confirm what was created and how to invoke it
+6. If a new role was created, add it to `~/.squad/roles.md`
 
 ## Editing
 
@@ -145,6 +146,7 @@ When the user says `/squad delete` or asks to remove a role or specialist:
 2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the target is a built-in file, tell them it can't be removed but can be overridden with a custom version.
 3. Show what will be deleted and ask for confirmation
 4. Delete the file (and the directory if it's now empty) and confirm
+5. If a role was deleted, remove it from `~/.squad/roles.md`
 
 ## Help
 
@@ -165,7 +167,6 @@ List available commands with a one-line description of each:
 
 When the user says `/squad list`:
 
-Use Glob to discover all installed roles, specialists, and tools. Present them grouped:
-- **Roles** — from `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`, each with its description
-- **Specialists** — for each role, list its specialists (both built-in and custom)
-- **Tools** — for each role, list available tools
+Read `~/.squad/roles.md` for available roles. For each role, use Glob to find its specialists and tools:
+- **Specialists** — `~/.squad/[role]/*.md` and `~/.squad/[role]/custom/*.md` (exclude `dna.md`)
+- **Tools** — `~/.squad/[role]/tools/*.md`
