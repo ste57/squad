@@ -13,16 +13,6 @@ Paste into Claude Code:
 Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill, then run /squad
 ```
 
-<h4>Layers</h4>
-
-```
-seed → DNA → project
-```
-
-**seed** — Universal rules every role inherits.
-**DNA** — The identity of the role.
-**project** — Context and conventions for your repo. Lives in `.squad/`.
-
 <h4>Custom Roles</h4>
 
 ```
