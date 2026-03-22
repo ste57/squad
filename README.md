@@ -10,10 +10,12 @@ Squad is a role system for AI agents. One role, every project.
 
 Tell Claude Code:
 
+> [!NOTE]
 > Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
 
 Then:
 
+> [!NOTE]
 > /squad
 
 <br>
@@ -22,17 +24,17 @@ Then:
 
 Squad has three layers:
 
-**Seed** — Rules every role inherits. Non-negotiable.
+> **Seed** — Rules every role inherits. Non-negotiable.
+>
+> **DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+>
+> **Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
+>
+> `seed → DNA → project`
+>
+> Each layer adds specificity. No layer overrides the one above it.
 
-**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
-
-**Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
-
-```
-seed → DNA → project
-```
-
-Each layer adds specificity. No layer overrides the one above it.
+<br>
 
 <br>
 
