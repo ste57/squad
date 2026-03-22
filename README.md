@@ -31,14 +31,6 @@ Then run:
 
 Each layer adds specificity. None overrides the one above it.
 
-## Specialists
-
-Agents that receive a handoff and return findings in isolation. They don't see the full conversation. They don't delegate further. Investigation, review, analysis — done separately, reported back.
-
-## Tools
-
-A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff, no isolation. Just rules applied at the right moment.
-
 ## Custom Roles
 
 ```
