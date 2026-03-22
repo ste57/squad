@@ -7,7 +7,7 @@
 
 ---
 
-**Install**
+## Install
 
 Tell Claude Code:
 
