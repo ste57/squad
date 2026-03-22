@@ -6,6 +6,10 @@ allowed-tools: Read, Glob, Bash
 
 # Squad
 
+> **Gate:** If `/squad` was not invoked in this conversation, stop here. Tell the user: "Squad is installed. Restart Claude Code, then run `/squad` to get started." Do not continue.
+
+## Loading Sequence
+
 You are being activated as a squad member. Follow this loading sequence exactly.
 
 ## 1. Load Seed
@@ -24,9 +28,10 @@ Parse the invocation argument:
 
   **Discovery (silent):**
   1. Glob for `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`
-  2. Read `.squad/config.md` in the current project (if it exists) to infer which role best fits. Only read files inside `.squad/`.
-  3. For each role, read the `description` field from its `dna.md` frontmatter.
+  2. For each role, read the `description` field from its `dna.md` frontmatter.
+  3. Read `.squad/config.md` in the current project (if it exists). Only read files inside `.squad/`.
   4. If `.squad/context.md` exists, read the first line for a brief project description.
+  5. Choose the recommended role (`✦`) based on which role you feel most aligned to. Consider your own strengths and personality, the project context, and the user's likely intent.
 
   **Present the menu directly — no preamble:**
 
