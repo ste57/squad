@@ -37,3 +37,25 @@ Some work is better done separately. Investigation, review, analysis. Specialist
 ## Tools
 
 A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff or isolation, just rules applied at the right moment.
+
+## Custom Roles
+
+```
+/squad create
+```
+
+Describe what you need in plain language. Claude figures out whether it's a role, specialist, or tool, creates the file, and puts it in the right place.
+
+> I need someone who reviews security for the engineer role
+
+Claude creates `~/.squad/engineer/custom/security.md`
+
+Then: `/squad engineer/security`
+
+> I need a writer
+
+Claude creates `~/.squad/custom/writer/dna.md`
+
+Then: `/squad writer`
+
+Custom paths are gitignored. Your extensions stay yours.
