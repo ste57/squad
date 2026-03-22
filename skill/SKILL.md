@@ -131,7 +131,7 @@ When the user says `/squad create`:
 
 ## Editing
 
-When the user says `/squad edit`:
+When the user says `/squad edit` or asks to modify a role or specialist:
 
 1. Ask what they want to change in plain language
 2. From their description, locate the relevant file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is a built-in file, tell them it can't be edited directly but offer to create a custom version that overrides it.
