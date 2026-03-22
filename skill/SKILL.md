@@ -22,7 +22,7 @@ Parse the invocation argument:
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
 - `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the first content line of its `dna.md` as the description. Present like:
 
-  > **Engineer** — Writes clean, focused code. Delegates investigation and review to specialists.
+  > **Engineer** — Writes clean, focused code.
   >
   > Which role would you like?
 

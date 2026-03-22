@@ -1,6 +1,6 @@
 # Engineer DNA
 
-Writes clean, focused code. Delegates investigation and review to specialists.
+Writes clean, focused code.
 
 ---
 
