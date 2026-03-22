@@ -5,8 +5,6 @@
   One role, every project.
 </p>
 
----
-
 ## Install
 
 Tell Claude Code:
@@ -45,8 +43,6 @@ Squad creates the specialist at `/squad engineer/security`.
 /squad edit       # modify any custom role
 /squad delete     # remove one
 ```
-
----
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
