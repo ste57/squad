@@ -1,6 +1,6 @@
 ---
 name: squad
-description: Dispatch specialist AI agent personalities. Invoke with /squad [role] or /squad [role]/[specialist] (e.g. /squad engineer, /squad engineer/triage).
+description: Activate a squad role, optionally with a specialist (e.g. /squad engineer, /squad engineer/triage).
 allowed-tools: Read
 ---
 
