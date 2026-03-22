@@ -116,7 +116,7 @@ When the user says `/squad config` or asks to adjust settings:
 
 ## Creation
 
-When the user says `/squad create` or asks to create something new:
+When the user says `/squad create`:
 
 1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
 2. From their description, determine the type:
@@ -129,7 +129,7 @@ When the user says `/squad create` or asks to create something new:
 
 ## Editing
 
-When the user says `/squad edit` or asks to modify something:
+When the user says `/squad edit`:
 
 1. Ask what they want to change in plain language
 2. From their description, locate the relevant file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is a built-in file, tell them it can't be edited directly but offer to create a custom version that overrides it.
@@ -139,7 +139,7 @@ When the user says `/squad edit` or asks to modify something:
 
 ## Deletion
 
-When the user says `/squad delete` or asks to remove something:
+When the user says `/squad delete`:
 
 1. Ask what they want to remove in plain language
 2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the target is a built-in file, tell them it can't be removed but can be overridden with a custom version.
