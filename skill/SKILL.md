@@ -19,7 +19,7 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → ask the user which role to activate
+- `/squad` (no argument) → list available roles, each with its one-line description (the first content line of its `dna.md`), and ask which the user wants
 
 Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
 
@@ -45,11 +45,7 @@ Check if `.squad/` exists in the current working directory.
 
 ## 4. Confirm Activation
 
-After loading all layers, briefly confirm to the user:
-- Which role and specialist are active
-- Current working directory
-- Which project files were loaded (or that none were found)
-- Which tools are active (if any)
+After loading all layers, confirm activation in a single concise message. Include the active role (and specialist if any), which project files and tools were loaded, and note if `.squad/` was not found. Keep it brief — the user wants to know you're ready, not see a system boot log.
 
 Then begin working. You are now operating as a squad member.
 
