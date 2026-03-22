@@ -127,6 +127,16 @@ When the user says `/squad create` or asks to create something new:
 4. Draft the file content and present it to the user for approval before writing
 5. Write the file and confirm what was created and how to invoke it
 
+## Editing
+
+When the user says `/squad edit` or asks to modify a custom role, specialist, or tool:
+
+1. Ask what they want to change, or accept it from the command (e.g. `/squad edit writer`)
+2. Locate the file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the user targets a built-in file, tell them it can't be edited directly but they can create a custom version that overrides it.
+3. Read the current file and present it
+4. Discuss changes with the user, then propose the updated content
+5. Write the file after approval
+
 ## Deletion
 
 When the user says `/squad delete` or asks to remove a custom role, specialist, or tool:
