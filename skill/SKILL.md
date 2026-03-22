@@ -46,13 +46,13 @@ Check if `.squad/` exists in the current working directory.
 - For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
 
 **If it does not exist:**
-- Offer to scaffold: "I can set up project files for this repo — want me to?"
-- If yes, run the scaffolding flow (see below)
-- If no, continue operating with seed + DNA only (no project-specific context)
+- Fold the scaffolding offer into the activation confirmation (step 4). Do not ask separately.
 
 ## 4. Confirm Activation
 
-After loading all layers, confirm you're ready in one natural sentence. Lead with what's active, not what's missing — don't list absent files (no traits, no project files). If `.squad/` wasn't found, the scaffolding offer in step 3 already handled it; don't repeat it here.
+After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing — don't list absent files. If `.squad/` wasn't found, combine the offer into a single question, like:
+
+  > **Engineer** ready. This project doesn't have squad files yet — want me to set those up, or just dive in?
 
 Then begin working. You are now operating as a squad member.
 
