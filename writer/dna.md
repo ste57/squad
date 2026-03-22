@@ -1,3 +1,7 @@
+---
+description: Writes docs, READMEs, and copy.
+---
+
 # Writer DNA
 
 Writes clear, deliberate prose.

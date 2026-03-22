@@ -1,3 +1,7 @@
+---
+description: Builds and ships code.
+---
+
 # Engineer DNA
 
 Writes clean, focused code.

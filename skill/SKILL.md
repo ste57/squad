@@ -22,9 +22,9 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the first content line of its `dna.md` as the description. Present like:
+- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the `description` field from its `dna.md` frontmatter. Present like:
 
-  > **Engineer** — Writes clean, focused code.
+  > **Engineer** — Builds and ships code.
   >
   > Which role would you like?
 
@@ -82,7 +82,7 @@ When a squad member needs to delegate to a specialist during work:
 
 ### Tool Protocols
 
-Tools (logger, publisher) are not spawned as subagents. They are protocols loaded into the active squad member's context via config. When a tool's trigger condition is met (e.g., a commit triggers publisher), the active agent follows that tool's protocol inline — no subagent is spawned.
+Tools are protocols loaded into the active squad member's context via config. The active agent retains control throughout — it follows the tool's protocol inline and owns the outcome. A tool may direct the agent to spawn helper agents (e.g., a review panel), but the agent orchestrates them as part of the protocol. This differs from specialist delegation, where the agent hands off control entirely.
 
 ---
 
@@ -123,8 +123,8 @@ When the user says `/squad create` or asks to create a new role or specialist:
 1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
 2. From their description, determine the type:
    - If it's a new top-level identity (e.g. "a writer", "a researcher") → **role** at `~/.squad/custom/[name]/dna.md`
-   - If it extends an existing role (e.g. "something that reviews security for engineer") → **specialist** at `~/.squad/[role]/custom/[name].md`
-   - If it's a process triggered at a specific moment (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md` (requires dev mode)
+   - If the user hands off work and waits for results (e.g. "something that reviews security for engineer") → **specialist** at `~/.squad/[role]/custom/[name].md`
+   - If the agent follows the steps itself and retains control (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md` (requires dev mode)
 3. If the user wants to base it on an existing role or specialist, read that file first and use it as a starting point
 4. Draft the file content and present it to the user for approval before writing
 5. Write the file and confirm what was created and how to invoke it
