@@ -5,37 +5,41 @@
 
 <br>
 
-`/squad` loads the role, its principles, and your project context. The agent works within those boundaries.
+<p align="center">
+<code>/squad</code> loads the role, its principles, and your project context. The agent works within those boundaries.
+</p>
 
 <br>
 
----
-
+<p align="center">
 Tell Claude Code:
+</p>
 
 ```
 Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill
 ```
 
+<p align="center">
 Then:
+</p>
 
 ```
 /squad
 ```
 
+<br>
+
 ---
 
 <br>
 
-### Layers
+**Layers** — Squad has three layers:
 
-Squad has three layers:
-
-&nbsp;&nbsp;&nbsp;&nbsp;**Seed** — Rules every role inherits. Non-negotiable.
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
+> `Seed` — Rules every role inherits. Non-negotiable.
+>
+> `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+>
+> `Project files` — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
 
 ```
 seed  →  DNA  →  project
@@ -45,19 +49,17 @@ Each layer adds specificity. No layer overrides the one above it.
 
 <br>
 
-### Specialists
+**Specialists** — Some work is better done separately. Investigation, review, analysis. Specialists are agents that receive a handoff and return findings without seeing the full conversation or delegating further.
 
-Some work is better done separately. Investigation, review, analysis. Specialists are agents that receive a handoff and return findings without seeing the full conversation or delegating further.
-
-### Tools
-
-A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff or isolation, just rules applied at the right moment.
+**Tools** — A specialist is an agent you bring in. A tool is a process you follow — a commit checklist, a logging format. No handoff or isolation, just rules applied at the right moment.
 
 <br>
 
-### Custom Roles
+---
 
-Beyond the built-in roles, you can create your own:
+<br>
+
+**Custom Roles** — Beyond the built-in roles, you can create your own:
 
 ```
 /squad create
