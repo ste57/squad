@@ -26,11 +26,11 @@ Then:
 
 Squad has three layers:
 
-| | |
-|---|---|
-| **Seed** | Rules every role inherits. Non-negotiable. |
-| **DNA** | The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project. |
-| **Project files** | Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo. |
+**Seed** — Rules every role inherits. Non-negotiable.
+
+**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+
+**Project files** — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
 
 Each layer adds specificity. No layer overrides the one above it.
 
