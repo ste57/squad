@@ -15,15 +15,13 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 
 <h4>Custom Roles</h4>
 
-Create, edit, or delete roles with natural language:
+**`/squad create`** — describe what you need in plain language
 
-```
-/squad create
-/squad edit
-/squad delete
-```
+**`/squad edit`** — modify any custom role
 
-"I need someone who reviews security for the engineer role" → `/squad engineer/security`
+**`/squad delete`** — remove one
+
+> "I need someone who reviews security for the engineer role" → `/squad engineer/security`
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
