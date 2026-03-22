@@ -28,6 +28,8 @@ Parse the invocation argument:
 
 Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
 
+If `~/.squad/[role]/traits.md` exists, read it. Traits are the user's personal preferences for this role — they layer on top of DNA and carry across projects. Traits are gitignored; they never ship with the repo.
+
 If `~/.squad/[role]/dna.md` does not exist, check `~/.squad/custom/[role]/dna.md`. If still not found, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
 If a specialist was specified, read `~/.squad/[role]/[specialist].md`. If not found, check `~/.squad/[role]/custom/`. If still not found, tell the user and list available specialists for that role.
@@ -59,7 +61,7 @@ Then begin working. You are now operating as a squad member.
 Each layer adds specificity within the bounds set by earlier layers. Seed rules are absolute and cannot be overridden by any subsequent layer.
 
 ```
-seed (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
+seed (absolute) → DNA → traits (if exists) → specialist → project files (config, style, context, intel) → tools from config
 ```
 
 ## Delegation (Mid-Task Handoff)
