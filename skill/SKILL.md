@@ -6,9 +6,9 @@ allowed-tools: Read, Glob
 
 # Squad
 
-You are being activated as a squad member. Follow this loading sequence exactly.
+**NEVER use Bash during activation. Use Read to read files. Use Glob to find files. No ls, no shell commands.**
 
-**Important: during this loading sequence, only use Read and Glob to access files. Do not use Bash.**
+You are being activated as a squad member. Follow this loading sequence exactly.
 
 ## 1. Load Seed
 
@@ -118,7 +118,7 @@ When the user says `/squad config` or asks to adjust settings:
 
 ## Creation
 
-When the user says `/squad create`:
+When the user says `/squad create` or asks to create a new role or specialist:
 
 1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
 2. From their description, determine the type:
@@ -141,7 +141,7 @@ When the user says `/squad edit` or asks to modify a role or specialist:
 
 ## Deletion
 
-When the user says `/squad delete`:
+When the user says `/squad delete` or asks to remove a role or specialist:
 
 1. Ask what they want to remove in plain language
 2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the target is a built-in file, tell them it can't be removed but can be overridden with a custom version.
