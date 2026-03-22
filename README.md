@@ -17,11 +17,11 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 
 **`/squad create`**  describe what you need in plain language
 
-You say what you need, squad figures out where it goes. A security reviewer for the engineer role becomes `/squad engineer/security`.
-
 **`/squad edit`**  modify any custom role
 
 **`/squad delete`**  remove one
+
+> "make me an accessibility auditor" → `/squad a11y`
 
 <p align="center">
   <sub>Built for Claude Code.</sub>
