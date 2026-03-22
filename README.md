@@ -16,7 +16,7 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 <h4>Custom Roles</h4>
 
 `/squad create`
-> "make me an accessibility auditor" ▸ `/squad a11y`
+> "make me an accessibility auditor"
 
 `/squad edit`
 > "make the a11y auditor check for color contrast too"
