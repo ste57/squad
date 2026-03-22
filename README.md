@@ -17,9 +17,25 @@ Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from 
 
 <h3>Layers</h3>
 
-1. `seed` — Universal rules every role inherits. Non-negotiable.
-2. `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
-3. `project` — Context, conventions, and discoveries specific to where you're working. Lives in `.squad/` in your repo.
+<p align="center">
+  <code>seed</code> → <code>DNA</code> → <code>project</code>
+</p>
+
+<h4>seed</h4>
+
+Universal rules every role inherits. Non-negotiable.
+
+<h4>DNA</h4>
+
+The identity of the role. An engineer writes code. A reviewer critiques it.
+DNA doesn't change per project.
+
+<h4>project</h4>
+
+Context, conventions, and discoveries specific to where you're working.
+Lives in `.squad/` in your repo.
+
+<br>
 
 Each layer adds specificity. None overrides the one above it.
 
