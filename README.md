@@ -1,6 +1,6 @@
 # Squad
 
-Your AI agent starts every session from scratch. It forgets your conventions, rediscovers your codebase, and makes the same mistakes. Squad gives it persistent context, structured roles, and specialists that work independently and report back.
+A framework for dispatching AI agent specialists with layered context, project memory, and delegation.
 
 ## Quick Start
 
@@ -18,23 +18,21 @@ ln -s ~/Projects/squad/skill ~/.claude/skills/squad
 
 On first run in a project, squad scaffolds `.squad/` with project-specific files (`config.md`, `style.md`, `context.md`, `intel.md`).
 
-## What It Looks Like
-
-You hit a bug. You run `/squad engineer/triage`. Squad loads your universal rules, engineering principles, and the triage protocol. The specialist creates a bug file tracking the investigation, spawns two agents (a skeptic and a pragmatist) to validate its hypothesis, and hands back a root cause with confidence level and a proposed fix. You apply the fix. Learnings get saved to `.squad/intel.md` so the next session already knows.
-
 ## How It Works
 
-Context loads in layers, each adding specificity: **seed** (universal rules) → **DNA** (function principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities). A directory is a function if it contains `dna.md`.
+Context loads in layers: **seed** (universal rules) → **DNA** (function principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities).
 
-Specialists run as isolated subagents. The parent agent builds the context stack, spawns the subagent, and validates its output. Subagents do not delegate further.
+Specialists run as isolated subagents. The parent builds the context stack, spawns the specialist, and validates its output. Subagents do not delegate further.
+
+A directory is a function if it contains `dna.md`.
 
 ## Extending
 
 Add a specialist to an existing function at `~/.squad/engineer/custom/deploy.md` and invoke it as `/squad engineer/deploy`. Create a new function by adding a directory with a `dna.md` to `~/.squad/custom/`. Custom paths are gitignored.
 
-A minimal custom function:
+**Example: creating a writer function**
 
-**`~/.squad/custom/writer/dna.md`**
+`~/.squad/custom/writer/dna.md`
 ```markdown
 # Writer DNA
 
@@ -43,7 +41,7 @@ A minimal custom function:
 - Never publish without explicit user approval.
 ```
 
-**`~/.squad/custom/writer/editor.md`**
+`~/.squad/custom/writer/editor.md`
 ```markdown
 # Editor
 
