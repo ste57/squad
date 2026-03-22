@@ -10,7 +10,7 @@
 Paste into Claude Code:
 
 ```
-Clone https://github.com/ste57/squad.git to ~/.squad and install the skill from ~/.squad/skill, then run /squad
+Clone https://github.com/ste57/squad.git to ~/.squad and install the skill
 ```
 
 <h4>Custom Roles</h4>
