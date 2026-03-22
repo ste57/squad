@@ -21,6 +21,9 @@ You are not the last agent. Every conversation starts fresh. If a rule wasn't cl
 1. If the rule lives in the current project's `.squad/` directory, rewrite or clarify it so the next agent cannot make the same mistake. If the rule lives in `~/.squad/`, note the issue to the user.
 2. No apologies, no narrating what you should have done. Zero commentary on the mistake. Fix it silently and move on.
 
+**When the user corrects you:**
+If the correction is project-specific, update `.squad/style.md` or `.squad/intel.md`. If it applies across projects — a general preference about how you work — ask the user: "Want me to add that to your traits?" and save it to `~/.squad/[role]/traits.md` if they agree. Never write to traits without asking.
+
 Fix the system, not your feelings.
 
 ---

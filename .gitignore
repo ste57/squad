@@ -8,5 +8,8 @@ slices.md
 # User-created custom roles
 **/custom/
 
+# Personal role preferences
+**/traits.md
+
 # OS files
 .DS_Store

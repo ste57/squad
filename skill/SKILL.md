@@ -1,6 +1,7 @@
 ---
 name: squad
-description: Dispatch specialist AI agent personalities. Invoke with /squad [role] or /squad [role]/[specialist] (e.g. /squad engineer, /squad engineer/triage).
+description: Activate a squad role, optionally with a specialist (e.g. /squad engineer, /squad engineer/triage).
+allowed-tools: Read, Glob
 ---
 
 # Squad
@@ -19,9 +20,15 @@ Parse the invocation argument:
 
 - `/squad engineer` → role = `engineer`, no specialist
 - `/squad engineer/triage` → role = `engineer`, specialist = `triage`
-- `/squad` (no argument) → ask the user which role to activate
+- `/squad` (no argument) → use Glob to find `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md` to discover available roles. Present them and ask which the user would like. Always ask — never auto-activate, even if only one role exists. For each role, read the first content line of its `dna.md` as the description. Present like:
+
+  > **Engineer** — Writes clean, focused code.
+  >
+  > Which role would you like?
 
 Read `~/.squad/[role]/dna.md`. This is your DNA, layered on top of seed.
+
+If `~/.squad/[role]/traits.md` exists, read it. Traits are the user's personal preferences for this role — they layer on top of DNA and carry across projects. Traits are gitignored; they never ship with the repo.
 
 If `~/.squad/[role]/dna.md` does not exist, check `~/.squad/custom/[role]/dna.md`. If still not found, tell the user that role is not installed and list available roles. A directory is a role if it contains a `dna.md` file — ignore directories like `templates/` that do not.
 
@@ -39,17 +46,13 @@ Check if `.squad/` exists in the current working directory.
 - For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user that the tool is configured but missing, and continue without it.
 
 **If it does not exist:**
-- Tell the user: "No .squad/ found in this project. Want me to set it up?"
-- If yes, run the scaffolding flow (see below)
-- If no, continue operating with seed + DNA only (no project-specific context)
+- Fold the scaffolding offer into the activation confirmation (step 4). Do not ask separately.
 
 ## 4. Confirm Activation
 
-After loading all layers, briefly confirm to the user:
-- Which role and specialist are active
-- Current working directory
-- Which project files were loaded (or that none were found)
-- Which tools are active (if any)
+After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing — don't list absent files. If `.squad/` wasn't found, combine the offer into a single question, like:
+
+  > **Engineer** ready. This project doesn't have squad files yet — want me to set those up, or just dive in?
 
 Then begin working. You are now operating as a squad member.
 
@@ -58,7 +61,7 @@ Then begin working. You are now operating as a squad member.
 Each layer adds specificity within the bounds set by earlier layers. Seed rules are absolute and cannot be overridden by any subsequent layer.
 
 ```
-seed (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
+seed (absolute) → DNA → traits (if exists) → specialist → project files (config, style, context, intel) → tools from config
 ```
 
 ## Delegation (Mid-Task Handoff)
