@@ -23,7 +23,8 @@ If intent is missing, ask before proceeding.
 4. **Only stage what was asked for** — never bundle in unrelated uncommitted work. If in doubt, ask.
 5. **Respect ignore rules** — if version control says a file is ignored, do not force-add it.
 6. **If logger is active** — follow the logger protocol to propose log entries for each commit. Do not generate log entries outside the logger protocol.
-7. **Propose the commit(s)** — present grouped commits with messages for approval. Log entries are proposed alongside commits but only finalized after approval.
+7. **Check for intel/style updates** — before proposing, ask: did this work reveal unexpected behavior, an undocumented pattern, or a convention not yet in `.squad/style.md`? If yes, include the proposed addition to `intel.md` or `style.md` alongside the commit proposal. If nothing, move on.
+8. **Propose the commit(s)** — present grouped commits with messages for approval. Log entries are proposed alongside commits but only finalized after approval.
 
 ---
 
