@@ -40,22 +40,22 @@ A specialist is an agent you bring in. A tool is a process you follow — a comm
 
 ## Custom Roles
 
-```
-/squad create
-```
+Beyond the built-in roles, you can create your own:
 
-Describe what you need in plain language. Claude figures out whether it's a role, specialist, or tool, creates the file, and puts it in the right place.
+> /squad create
+
+Tell Claude what you need. It figures out the type, creates the file, and tells you how to use it.
 
 > I need someone who reviews security for the engineer role
 
-Claude creates `~/.squad/engineer/custom/security.md`
+Claude creates the specialist. Use `/squad engineer/security` to run it.
 
-Then: `/squad engineer/security`
+> /squad edit
 
-> I need a writer
+Modify any custom role or specialist.
 
-Claude creates `~/.squad/custom/writer/dna.md`
+> /squad delete
 
-Then: `/squad writer`
+Remove one.
 
-Custom paths are gitignored. Your extensions stay yours.
+Custom roles stay local to you.
