@@ -7,6 +7,8 @@
 
 <h4>Get Started</h4>
 
+Paste into Claude Code:
+
 ```
 Install https://github.com/ste57/squad.git to ~/.squad as a skill
 ```
