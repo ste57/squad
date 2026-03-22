@@ -25,17 +25,9 @@ Then run:
 
 ## Layers
 
-Three layers, in order.
-
-**Seed** — Universal rules every role inherits. Non-negotiable.
-
-**DNA** — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
-
-**Project** — Context, conventions, and discoveries specific to where you're working. Lives in `.squad/` in your repo.
-
-```
-seed → DNA → project
-```
+1. `seed` — Universal rules every role inherits. Non-negotiable.
+2. `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+3. `project` — Context, conventions, and discoveries specific to where you're working. Lives in `.squad/` in your repo.
 
 Each layer adds specificity. None overrides the one above it.
 
