@@ -9,7 +9,7 @@
 
 ---
 
-## Install
+<h2 align="center">Install</h2>
 
 Tell Claude Code:
 
@@ -25,7 +25,7 @@ Then run:
 
 ---
 
-**Layers**
+<h2 align="center">Layers</h2>
 
 1. `seed` — Universal rules every role inherits. Non-negotiable.
 2. `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
@@ -35,7 +35,7 @@ Each layer adds specificity. None overrides the one above it.
 
 ---
 
-**Custom Roles**
+<h2 align="center">Custom Roles</h2>
 
 ```
 /squad create
