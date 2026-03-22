@@ -1,138 +1,66 @@
 # Squad
 
-A layered agent framework for dispatching AI specialists with structured roles, project memory, and delegation.
-
-Squad organizes AI behavior into inheritable layers so every session starts with the right context, follows the right protocols, and hands off to the right specialist when needed.
+Your AI agent starts every session from scratch. It forgets your conventions, rediscovers your codebase, and makes the same mistakes. Squad gives it persistent context, structured roles, and specialists that work independently and report back.
 
 ## Quick Start
 
 ```bash
-# Clone and install
 git clone <repo-url> ~/Projects/squad
 ln -s ~/Projects/squad ~/.squad
-
-# Link the skill (Claude Code)
 ln -s ~/Projects/squad/skill ~/.claude/skills/squad
-
-# Use it
-/squad engineer
 ```
 
-On first run in a project, squad offers to scaffold `.squad/` with project-specific files.
+```bash
+/squad engineer              # seed + engineer DNA
+/squad engineer/triage       # + triage specialist
+/squad engineer/review       # + review specialist
+```
+
+On first run in a project, squad scaffolds `.squad/` with project-specific files (`config.md`, `style.md`, `context.md`, `intel.md`).
+
+## What It Looks Like
+
+You hit a bug. You run `/squad engineer/triage`. Squad loads your universal rules, engineering principles, and the triage protocol. The specialist creates a bug file tracking the investigation, spawns two agents (a skeptic and a pragmatist) to validate its hypothesis, and hands back a root cause with confidence level and a proposed fix. You apply the fix. Learnings get saved to `.squad/intel.md` so the next session already knows.
 
 ## How It Works
 
-Squad loads context in layers. Each layer adds specificity. Earlier layers set the rules, later layers operate within them.
+Context loads in layers, each adding specificity: **seed** (universal rules) → **DNA** (function principles) → **specialist** (focused protocol) → **project files** (local context) → **tools** (optional capabilities). A directory is a function if it contains `dna.md`.
 
-```
-seed → DNA → specialist → project files → tools
-```
-
-| Layer | Lives in | Purpose |
-|-------|----------|---------|
-| **Seed** | `~/.squad/seed.md` | Universal foundation. Applies to every function, every project. Non-negotiable. |
-| **DNA** | `~/.squad/engineer/dna.md` | Function-level principles. Language-agnostic, project-agnostic. |
-| **Specialist** | `~/.squad/engineer/triage.md` | Focused protocol for a specific activity. Loaded on demand. |
-| **Project files** | `.squad/` in your project | Style, context, intel, config. Project-specific, mutable. |
-| **Tools** | `~/.squad/engineer/tools/` | Optional capabilities (logger, publisher). Enabled per project. |
-
-## Invocation
-
-```bash
-/squad engineer              # Load seed + engineer DNA
-/squad engineer/triage       # Load seed + engineer DNA + triage specialist
-/squad engineer/review       # Load seed + engineer DNA + review specialist
-```
-
-## Project Files
-
-When you run `/squad` in a project for the first time, it offers to create `.squad/` with four files:
-
-| File | Contains |
-|------|----------|
-| `config.md` | Active function, enabled tools, project settings |
-| `style.md` | Conventions for how work is done in this project |
-| `context.md` | What this project is. Domain knowledge. Things known before starting. |
-| `intel.md` | Things learned while working. Gotchas, patterns, traps. Updated by the squad. |
-
-## Delegation
-
-Specialists work in isolation via subagents. The flow:
-
-1. The active agent reads the specialist's input spec
-2. Spawns a subagent with seed + DNA + specialist + project files
-3. The subagent works in isolation and returns structured results
-4. The parent agent validates and continues
-
-Subagents do not delegate further. Tools run inline, not as subagents.
-
-## What's Included
-
-### Engineer Function
-
-| File | Role |
-|------|------|
-| `engineer/dna.md` | Code organization, documentation, safety principles |
-| `engineer/triage.md` | Bug investigation. Dual-agent validation (skeptic + pragmatist). Bug file tracking. |
-| `engineer/review.md` | Code review. Independent evaluation with structured findings. |
-| `engineer/tools/logger.md` | Daily log entries, weekly summaries, release notes |
-| `engineer/tools/publisher.md` | Commit grouping, style checking, PR generation |
+Specialists run as isolated subagents. The parent agent builds the context stack, spawns the subagent, and validates its output. Subagents do not delegate further.
 
 ## Extending
 
-### Custom Specialists
+Add a specialist to an existing function at `~/.squad/engineer/custom/deploy.md` and invoke it as `/squad engineer/deploy`. Create a new function by adding a directory with a `dna.md` to `~/.squad/custom/`. Custom paths are gitignored.
 
-Add specialists to an existing function:
+A minimal custom function:
 
-```
-~/.squad/engineer/custom/deploy.md
-```
+**`~/.squad/custom/writer/dna.md`**
+```markdown
+# Writer DNA
 
-Invoked as `/squad engineer/deploy`. Custom directories are gitignored so upstream updates don't overwrite them.
-
-### Custom Functions
-
-Create an entirely new function:
-
-```
-~/.squad/custom/writer/
-├── dna.md
-├── editor.md
-└── tools/
-    └── formatter.md
+- Write for clarity. Every sentence earns its place.
+- Match the voice defined in `.squad/style.md`.
+- Never publish without explicit user approval.
 ```
 
-Invoked as `/squad writer`. A directory is a function if it contains `dna.md`.
+**`~/.squad/custom/writer/editor.md`**
+```markdown
+# Editor
 
-## Dev Mode
+Revision specialist. Reviews a draft and returns structured feedback.
 
-If `~/.squad/dev.md` exists, the system unlocks editing of system files. This is for the framework maintainer. `dev.md` is gitignored and contains:
+## Input
+- **Draft** — the text to review
+- **Audience** — who will read it
 
-- Layer placement rules and litmus tests
-- Terminology standards
-- Architectural invariants
-- A changelog of all system file edits
+## Protocol
+1. Read the full draft before noting anything.
+2. Flag unclear passages with a specific rewrite suggestion.
+3. Check for consistency with `.squad/style.md`.
 
-Without `dev.md`, system files are read-only during operation.
-
-## Structure
-
+## Return Format
+1. **Verdict** — ready / needs revision
+2. **Issues** — list with location, problem, and suggested fix
 ```
-~/.squad/
-├── seed.md                      # Universal foundation
-├── engineer/
-│   ├── dna.md                   # Engineering principles
-│   ├── triage.md                # Investigation specialist
-│   ├── review.md                # Code review specialist
-│   └── tools/
-│       ├── logger.md            # Daily log protocol
-│       └── publisher.md         # Commit/PR protocol
-├── custom/                      # User-created functions (gitignored)
-├── templates/                   # Scaffolding templates
-│   ├── config.md
-│   ├── style.md
-│   ├── context.md
-│   └── intel.md
-└── skill/
-    └── SKILL.md                 # The /squad entry point
-```
+
+Invoke with `/squad writer/editor`.
