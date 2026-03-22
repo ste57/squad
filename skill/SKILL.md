@@ -129,19 +129,19 @@ When the user says `/squad create` or asks to create something new:
 
 ## Editing
 
-When the user says `/squad edit` or asks to modify a custom role, specialist, or tool:
+When the user says `/squad edit` or asks to modify something:
 
-1. Ask what they want to change, or accept it from the command (e.g. `/squad edit writer`)
-2. Locate the file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the user targets a built-in file, tell them it can't be edited directly but they can create a custom version that overrides it.
+1. Ask what they want to change in plain language
+2. From their description, locate the relevant file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is a built-in file, tell them it can't be edited directly but offer to create a custom version that overrides it.
 3. Read the current file and present it
 4. Discuss changes with the user, then propose the updated content
 5. Write the file after approval
 
 ## Deletion
 
-When the user says `/squad delete` or asks to remove a custom role, specialist, or tool:
+When the user says `/squad delete` or asks to remove something:
 
-1. Ask what they want to remove, or accept it from the command (e.g. `/squad delete writer`)
-2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the user targets a built-in file, tell them it can't be removed but can be overridden with a custom version.
+1. Ask what they want to remove in plain language
+2. Locate the file — only custom files can be deleted (`~/.squad/custom/` or `~/.squad/[role]/custom/`). If the target is a built-in file, tell them it can't be removed but can be overridden with a custom version.
 3. Show what will be deleted and ask for confirmation
 4. Delete the file (and the directory if it's now empty) and confirm
