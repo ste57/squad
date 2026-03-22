@@ -1,12 +1,12 @@
 <p align="center">
   <h1 align="center">Squad</h1>
-  <p align="center">A role system for AI agents. One role, every project.</p>
+  <p align="center"><em>A role system for AI agents. One role, every project.</em></p>
 </p>
 
 <br>
 
 <p align="center">
-<code>/squad</code> loads the role, its principles, and your project context. The agent works within those boundaries.
+<code>/squad</code> loads the role, its principles, and your project context.<br>The agent works within those boundaries.
 </p>
 
 <br>
@@ -33,19 +33,23 @@ Then:
 
 <br>
 
-**Layers** — Squad has three layers:
+Squad has three layers:
 
-> `Seed` — Rules every role inherits. Non-negotiable.
->
-> `DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
->
-> `Project files` — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
+`Seed` — Rules every role inherits. Non-negotiable.
+
+`DNA` — The identity of the role. An engineer writes code. A reviewer critiques it. DNA doesn't change per project.
+
+`Project files` — Context, conventions, and discoveries specific to where you're working. These live in `.squad/` in your repo.
 
 ```
 seed  →  DNA  →  project
 ```
 
 Each layer adds specificity. No layer overrides the one above it.
+
+<br>
+
+---
 
 <br>
 
@@ -59,7 +63,7 @@ Each layer adds specificity. No layer overrides the one above it.
 
 <br>
 
-**Custom Roles** — Beyond the built-in roles, you can create your own:
+Beyond the built-in roles, you can create your own:
 
 ```
 /squad create
