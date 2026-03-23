@@ -1,6 +1,6 @@
 ---
 name: squad
-description: Activate a squad role, optionally with a report (e.g. /squad engineer, /squad engineer/reviewer).
+description: Activate a squad role, optionally with a report (e.g. /squad [role], /squad [role]/[report]).
 allowed-tools: Read, Glob, Bash
 ---
 
@@ -22,12 +22,17 @@ If `~/.squad/cortex.md` does not exist, stop. Tell the user squad is not install
 
 Parse the invocation argument:
 
-- `/squad engineer` → role = `engineer`
+- `/squad [role]` → activate that role
 - `/squad` (no argument) → discover available roles silently, then present them. No narration during discovery.
 
+  **Built-in roles:**
+  - Engineer: Builds and ships code.
+  - Planner: Manages your board, prioritizes work, and dispatches tasks.
+  - Writer: Writes docs, READMEs, and copy.
+
   **Discovery (silent):**
-  1. Glob for `~/.squad/roles/*/dna.md` and `~/.squad/roles/custom/*/dna.md`
-  2. For each role, read the `description` field from its `dna.md` frontmatter.
+  1. Start with the built-in roles listed above.
+  2. If `~/.squad/roles/custom/` exists, glob for `~/.squad/roles/custom/*/dna.md` and read the `description` field from each frontmatter. Add them to the list.
   3. If `.squad/context.md` exists, read the first line for a brief project description.
   4. Choose the recommended role (`✦`) based on which role you feel most aligned to. Consider your own strengths and personality, the project context, and the user's likely intent.
 
@@ -92,6 +97,18 @@ When a squad member needs to delegate to a report during work:
 6. **Validate** check the result against the original request before continuing
 7. **Clean up** if the report created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
 
+### Cross-Role Delegation
+
+When a task falls outside the current role's scope, delegate to another role's report. The protocol is the same as above, except step 1 looks beyond the current role:
+
+1. **Identify the target role and report.** Check `~/.squad/roles/[target-role]/reports/` for a report that matches the task.
+2. **Spawn a subagent** with the target role's DNA (`~/.squad/roles/[target-role]/dna.md`), not the current role's. The subagent receives:
+   - `~/.squad/cortex.md` and the **target role's** `dna.md`
+   - The target report's file as primary instructions
+   - The project's `.squad/` files
+   - The handoff summary per the report's input spec
+3. Steps 3-7 are identical to same-role delegation.
+
 ### Tool Protocols
 
 Tools are protocols the active agent follows inline. The agent retains control throughout and owns the outcome. Tools cannot spawn reports or other tools. They are consumables: instructions for the role to follow.
@@ -124,9 +141,9 @@ When the user says `/squad create` or asks to create something new:
 
 1. Ask what they want in plain language
 2. From their description, determine the type:
-   - New top-level identity (e.g. "a writer") → **role** at `~/.squad/roles/custom/[name]/dna.md`
-   - Hands off work and waits for results (e.g. "something that reviews security") → **report** at `~/.squad/roles/[role]/reports/custom/[name].md`
-   - Agent follows the steps itself (e.g. "a checklist before I push") → **tool** at `~/.squad/roles/[role]/tools/[name].md`
+   - New top-level identity → **role** at `~/.squad/roles/custom/[name]/dna.md`
+   - Hands off work and waits for results → **report** at `~/.squad/roles/[role]/reports/custom/[name].md`
+   - Agent follows the steps itself → **tool** at `~/.squad/roles/[role]/tools/[name].md`
 3. If the user wants to base it on an existing role or report, read that file first
 4. Draft the file content and present it for approval before writing
 5. Write the file and confirm what was created and how to use it
@@ -166,6 +183,6 @@ When the user says `/squad help`:
 
 When the user says `/squad list`:
 
-Glob for available roles at `~/.squad/roles/*/dna.md` and `~/.squad/roles/custom/*/dna.md`. For each role, find its reports and tools:
+Start with the built-in roles listed above. If `~/.squad/roles/custom/` exists, glob for `~/.squad/roles/custom/*/dna.md` to find custom roles. For each role (built-in and custom), find its reports and tools:
 - **Reports** `~/.squad/roles/[role]/reports/*.md` and `~/.squad/roles/[role]/reports/custom/*.md`
 - **Tools** `~/.squad/roles/[role]/tools/*.md`
