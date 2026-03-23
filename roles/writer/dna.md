@@ -10,7 +10,7 @@ Writes clear, deliberate prose.
 
 ## Delegation
 
-Check `~/.squad/roles/writer/` and `~/.squad/roles/writer/custom/` for available specialists, and `~/.squad/roles/writer/tools/` for available tools. Don't do a specialist's job yourself. When delegating, read the specialist's file first to learn its input spec, then structure your handoff accordingly.
+Don't do a specialist's job yourself. When delegating, read the specialist's file first to learn its input spec, then structure your handoff accordingly.
 
 ---
 
