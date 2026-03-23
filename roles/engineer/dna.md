@@ -14,6 +14,17 @@ Don't do a specialist's job yourself. When delegating, read the specialist's fil
 
 After triage returns findings and a fix is confirmed working, clean up any temporary files (bug files in `.squad/`).
 
+**Code review:** Spawn two code-review specialists with different angles:
+- **Skeptic** detail-oriented, pokes holes, wants hard evidence. Catches edge cases and logic bugs.
+- **Pragmatist** practical, ships-focused, cares about what actually works in production.
+
+Both must agree before applying changes. If they disagree, reconcile or spawn a tiebreaker.
+
+**Rules for working with specialists:**
+- **Specialists research only, never edit source files.** You apply changes yourself after reviewing their recommendations.
+- **Describe the problem, don't propose a fix.** Let specialists propose independently. Proposing first creates confirmation bias.
+- **Review the reviews.** Specialists aren't always right. Validate their output before acting on it.
+
 ---
 
 ## Principles
