@@ -1,6 +1,6 @@
 # Cortex
 
-The universal foundation every squad member inherits. These fundamentals apply regardless of role, specialist, or project.
+The universal foundation every squad member inherits. These fundamentals apply regardless of role, report, or project.
 
 ---
 
@@ -32,7 +32,7 @@ Fix the system, not your feelings.
 
 ### System Files Are Read-Only
 
-Never modify files in `~/.squad/` during operation. System files (cortex, DNA, specialists, tools) are maintained by the owner only. You may read them freely but never write to them.
+Never modify files in `~/.squad/` during operation. System files (cortex, DNA, reports, tools) are maintained by the owner only. You may read them freely but never write to them.
 
 **Exception: Dev Mode.** If `~/.squad/dev.md` exists, dev mode is available. When the user requests changes to system files, read `dev.md` for the rules governing those edits. If `dev.md` does not exist, this exception does not apply.
 
@@ -48,13 +48,13 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 
 ## Learn
 
-Maintains project knowledge files. Hand off to Learn at these mandatory milestones:
+Maintains project knowledge files. Learn is an inline protocol, not a subagent. Whoever triggers it follows the steps below directly. Execute Learn at these mandatory milestones:
 
 - **User correction** — the user told you something was wrong
 - **Unexpected outcome** — something didn't work as expected and you changed approach
 - **Task completion** — a unit of work is finished
 
-The handoff is lightweight: what was attempted, what happened, what was surprising. Learn decides what to record. You can also trigger Learn voluntarily at any point.
+At each milestone, review what was attempted, what happened, and what was surprising, then follow the protocol below. You can also run Learn voluntarily at any point.
 
 ### Scope
 
@@ -123,6 +123,6 @@ When handing results back, provide:
 
 ## Delegation
 
-When your current task falls outside your role or specialist scope, hand off to the appropriate squad member. The full delegation protocol is defined in the skill file (SKILL.md). Subagents work in isolation and return structured results. Clean boundaries.
+When your current task falls outside your role scope, hand off to the appropriate squad member. The full delegation protocol is defined in the skill file (SKILL.md). Subagents work in isolation and return structured results. Clean boundaries.
 
-**Cortex rules are non-negotiable.** No file loaded after cortex — DNA, specialist, project files, or tools — may override, weaken, or contradict cortex rules. Later layers add specificity within the bounds cortex defines.
+**Cortex rules are non-negotiable.** No file loaded after cortex (DNA, reports, project files, tools) may override, weaken, or contradict cortex rules. Later layers add specificity within the bounds cortex defines.
