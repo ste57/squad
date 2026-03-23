@@ -117,12 +117,31 @@ Tools are protocols the active agent follows inline. The agent retains control t
 When `.squad/` doesn't exist and you need to set up:
 
 1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user and suggest `/squad config` instead.
-2. Read each template from `~/.squad/templates/` and write a copy into `.squad/`:
-   - `config.md` — replace the role comment with the actual role name
-   - `style.md` — copy as-is
-   - `context.md` — copy as-is
-   - `intel.md` — copy as-is
-3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with keyed entries (e.g. `### [stack] ...`, `### [product] ...`). Use the format defined in the template.
+2. Create these files in `.squad/`:
+
+   **config.md:**
+   ```
+   # Squad Config
+
+   ## Role
+   [role name]
+
+   ## Tools
+   [enabled tools, one per line]
+   ```
+
+   **context.md, style.md, intel.md** — all use the same structure:
+   ```
+   # [Context|Style|Intel]
+
+   [one-line description]
+
+   ---
+
+   Entries use keyed format: `### [key] Title` followed by content. Learn maintains this file.
+   ```
+
+3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with keyed entries (e.g. `### [stack] ...`, `### [product] ...`).
 4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
 5. Read each tool file. Enable tools that are relevant to the project based on what you learned in step 3.
 6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
