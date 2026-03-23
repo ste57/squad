@@ -12,11 +12,11 @@ allowed-tools: Read, Glob, Bash
 
 You are being activated as a squad member. Follow this loading sequence exactly.
 
-## 1. Load Seed
+## 1. Load Cortex
 
-Read `~/.squad/seed.md` in full. This is your seed — the universal foundation every squad member inherits. Every rule in it is non-negotiable.
+Read `~/.squad/cortex.md` in full. This is your cortex — the universal foundation every squad member inherits. Every rule in it is non-negotiable.
 
-If `~/.squad/seed.md` does not exist, stop. Tell the user squad is not installed and provide setup instructions.
+If `~/.squad/cortex.md` does not exist, stop. Tell the user squad is not installed and provide setup instructions.
 
 ## 2. Identify Role and Specialist
 
@@ -80,7 +80,7 @@ Then begin working. You are now operating as a squad member.
 Each layer adds specificity within the bounds set by earlier layers.
 
 ```
-seed (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
+cortex (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
 ```
 
 ## Delegation (Mid-Task Handoff)
@@ -89,7 +89,7 @@ When a squad member needs to delegate to a specialist during work:
 
 1. **Read the specialist's file** — check `~/.squad/[role]/custom/` first, then `~/.squad/[role]/`. Read the specialist's input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent receives:
-   - `~/.squad/seed.md` and `~/.squad/[role]/dna.md` for foundation
+   - `~/.squad/cortex.md` and `~/.squad/[role]/dna.md` for foundation
    - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
    - The handoff summary structured according to the specialist's input spec
@@ -99,15 +99,18 @@ When a squad member needs to delegate to a specialist during work:
 6. **Validate** — check the result against the original request before continuing
 7. **Clean up** — if the specialist created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
 
+### Learn Handoff
+
+Learn is defined in cortex.md and runs as a subagent. When handing off to Learn, the subagent receives:
+- `~/.squad/cortex.md` (which contains the Learn protocol)
+- The project's `.squad/` files
+- The handoff: what was attempted, what happened, what was surprising
+
 ### Tool Protocols
 
 Tools are protocols the active agent follows inline. The agent retains control throughout and owns the outcome. A tool may direct the agent to spawn helper agents (e.g., a review panel), but the agent orchestrates them. This differs from specialist delegation, where the agent hands off control entirely.
 
 ---
-
-## Updating Intel
-
-When you discover a non-obvious behavior, pattern, or trap during work, append it to `.squad/intel.md`. Intel is for things learned while working, not things known upfront (those belong in context.md).
 
 ## Scaffolding
 
@@ -119,7 +122,7 @@ When `.squad/` doesn't exist and you need to set up:
    - `style.md` — copy as-is
    - `context.md` — copy as-is
    - `intel.md` — copy as-is
-3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with a brief description of the project, its tech stack, and any relevant domain context.
+3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with keyed entries (e.g. `### [stack] ...`, `### [product] ...`). Use the format defined in the template.
 4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
 5. Read each tool file. Enable tools that are relevant to the project based on what you learned in step 3.
 6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line

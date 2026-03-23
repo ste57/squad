@@ -4,5 +4,4 @@ Conventions and rules for how work is done in this project.
 
 ---
 
-<!-- Define your project's style rules here. These are specific to the
-role and specialist you're working with. -->
+Entries use keyed format: `### [key] Title` followed by content. Learn maintains this file.
