@@ -29,9 +29,8 @@ Parse the invocation argument:
   **Discovery (silent):**
   1. Glob for `~/.squad/roles/*/dna.md` and `~/.squad/roles/custom/*/dna.md`
   2. For each role, read the `description` field from its `dna.md` frontmatter.
-  3. Read `.squad/config.md` in the current project (if it exists). Only read files inside `.squad/`.
-  4. If `.squad/context.md` exists, read the first line for a brief project description.
-  5. Choose the recommended role (`✦`) based on which role you feel most aligned to. Consider your own strengths and personality, the project context, and the user's likely intent.
+  3. If `.squad/context.md` exists, read the first line for a brief project description.
+  4. Choose the recommended role (`✦`) based on which role you feel most aligned to. Consider your own strengths and personality, the project context, and the user's likely intent.
 
   **Present the menu directly — no preamble:**
 
@@ -60,11 +59,10 @@ If a specialist was specified, check `~/.squad/roles/[role]/custom/[specialist].
 Check if `.squad/` exists in the current working directory.
 
 **If it exists:**
-- Read `.squad/config.md` for project settings and active tools
 - Read `.squad/style.md` for conventions (skip if missing)
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
-- For each active tool listed in config, read `~/.squad/roles/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user and continue without it.
+- Read all files in `~/.squad/roles/[role]/tools/` — if the directory exists, every tool in it is active. If the directory doesn't exist, skip.
 
 **If it does not exist:**
 - After the user tells you what they want to work on and you've selected a role, automatically scaffold `.squad/` and populate it with project context. Read the project's structure, README, and key files to fill in `.squad/context.md`. Do not ask — just configure it.
@@ -80,7 +78,7 @@ Then begin working. You are now operating as a squad member.
 Each layer adds specificity within the bounds set by earlier layers.
 
 ```
-cortex (absolute) → DNA → specialist → project files (config, style, context, intel) → tools from config
+cortex (absolute) → DNA → specialist → project files (style, context, intel) → tools
 ```
 
 ## Delegation (Mid-Task Handoff)
@@ -99,13 +97,6 @@ When a squad member needs to delegate to a specialist during work:
 6. **Validate** — check the result against the original request before continuing
 7. **Clean up** — if the specialist created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
 
-### Learn Handoff
-
-Learn is defined in cortex.md and runs as a subagent. When handing off to Learn, the subagent receives:
-- `~/.squad/cortex.md` (which contains the Learn protocol)
-- The project's `.squad/` files
-- The handoff: what was attempted, what happened, what was surprising
-
 ### Tool Protocols
 
 Tools are protocols the active agent follows inline. The agent retains control throughout and owns the outcome. A tool may direct the agent to spawn helper agents (e.g., a review panel), but the agent orchestrates them. This differs from specialist delegation, where the agent hands off control entirely.
@@ -116,21 +107,9 @@ Tools are protocols the active agent follows inline. The agent retains control t
 
 When `.squad/` doesn't exist and you need to set up:
 
-1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user and suggest `/squad config` instead.
-2. Create these files in `.squad/`:
+1. Create the `.squad/` directory in the current project root. If `.squad/` already exists with content, do not overwrite — tell the user what exists.
+2. Create these files in `.squad/` — all use the same structure:
 
-   **config.md:**
-   ```
-   # Squad Config
-
-   ## Role
-   [role name]
-
-   ## Tools
-   [enabled tools, one per line]
-   ```
-
-   **context.md, style.md, intel.md** — all use the same structure:
    ```
    # [Context|Style|Intel]
 
@@ -142,19 +121,7 @@ When `.squad/` doesn't exist and you need to set up:
    ```
 
 3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with keyed entries (e.g. `### [stack] ...`, `### [product] ...`).
-4. List the contents of `~/.squad/roles/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
-5. Read each tool file. Enable tools that are relevant to the project based on what you learned in step 3.
-6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
-7. Tell the user setup is complete and list what was created
-8. Load the enabled tools and continue operating
-
-## Configuration
-
-When the user says `/squad config` or asks to adjust settings:
-- If `.squad/` doesn't exist, run the scaffolding flow above
-- If it exists, read `.squad/config.md` and present current settings
-- Let the user enable/disable tools, change default role, or adjust settings
-- Save changes to `.squad/config.md`
+4. Tell the user setup is complete and list what was created
 
 ## Creation
 
@@ -198,7 +165,6 @@ When the user says `/squad help`:
 - `/squad create` — create a new role or specialist
 - `/squad update` — modify a custom role or specialist
 - `/squad delete` — remove a custom role or specialist
-- `/squad config` — adjust project settings
 - `/squad list` — show what's installed
 - `/squad help` — show this list
 
