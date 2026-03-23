@@ -27,7 +27,7 @@ Parse the invocation argument:
 - `/squad` (no argument) → discover available roles silently, then present them. No narration during discovery.
 
   **Discovery (silent):**
-  1. Glob for `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`
+  1. Glob for `~/.squad/roles/*/dna.md` and `~/.squad/roles/custom/*/dna.md`
   2. For each role, read the `description` field from its `dna.md` frontmatter.
   3. Read `.squad/config.md` in the current project (if it exists). Only read files inside `.squad/`.
   4. If `.squad/context.md` exists, read the first line for a brief project description.
@@ -49,11 +49,11 @@ Parse the invocation argument:
 
 **Loading the role:**
 
-Check `~/.squad/custom/[role]/dna.md` first, fall back to `~/.squad/[role]/dna.md`. If neither exists, tell the user and list available roles. A directory is a role if it contains `dna.md`.
+Check `~/.squad/roles/custom/[role]/dna.md` first, fall back to `~/.squad/roles/[role]/dna.md`. If neither exists, tell the user and list available roles. A directory is a role if it contains `dna.md`.
 
-If `~/.squad/[role]/traits.md` exists, read it. Traits are personal preferences for this role — they layer on top of DNA and carry across projects.
+If `~/.squad/roles/[role]/traits.md` exists, read it. Traits are personal preferences for this role — they layer on top of DNA and carry across projects.
 
-If a specialist was specified, check `~/.squad/[role]/custom/[specialist].md` first, fall back to `~/.squad/[role]/[specialist].md`. If neither exists, tell the user and list available specialists.
+If a specialist was specified, check `~/.squad/roles/[role]/custom/[specialist].md` first, fall back to `~/.squad/roles/[role]/[specialist].md`. If neither exists, tell the user and list available specialists.
 
 ## 3. Load Project Files
 
@@ -64,7 +64,7 @@ Check if `.squad/` exists in the current working directory.
 - Read `.squad/style.md` for conventions (skip if missing)
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
-- For each active tool listed in config, read `~/.squad/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user and continue without it.
+- For each active tool listed in config, read `~/.squad/roles/[role]/tools/[tool].md`. If a listed tool file does not exist, warn the user and continue without it.
 
 **If it does not exist:**
 - After the user tells you what they want to work on and you've selected a role, automatically scaffold `.squad/` and populate it with project context. Read the project's structure, README, and key files to fill in `.squad/context.md`. Do not ask — just configure it.
@@ -87,9 +87,9 @@ cortex (absolute) → DNA → specialist → project files (config, style, conte
 
 When a squad member needs to delegate to a specialist during work:
 
-1. **Read the specialist's file** — check `~/.squad/[role]/custom/` first, then `~/.squad/[role]/`. Read the specialist's input spec to know what format it expects.
+1. **Read the specialist's file** — check `~/.squad/roles/[role]/custom/` first, then `~/.squad/roles/[role]/`. Read the specialist's input spec to know what format it expects.
 2. **Spawn a subagent** — the subagent receives:
-   - `~/.squad/cortex.md` and `~/.squad/[role]/dna.md` for foundation
+   - `~/.squad/cortex.md` and `~/.squad/roles/[role]/dna.md` for foundation
    - The specialist's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
    - The handoff summary structured according to the specialist's input spec
@@ -142,7 +142,7 @@ When `.squad/` doesn't exist and you need to set up:
    ```
 
 3. Read the project's structure, README, and key files. Use what you learn to populate `.squad/context.md` with keyed entries (e.g. `### [stack] ...`, `### [product] ...`).
-4. List the contents of `~/.squad/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
+4. List the contents of `~/.squad/roles/[role]/tools/` to find available tools. If the directory doesn't exist, skip to step 7.
 5. Read each tool file. Enable tools that are relevant to the project based on what you learned in step 3.
 6. Add the enabled tool names to the `## Tools` section in `.squad/config.md`, one per line
 7. Tell the user setup is complete and list what was created
@@ -162,9 +162,9 @@ When the user says `/squad create` or asks to create something new:
 
 1. Ask what they want in plain language — don't ask them to choose between role, specialist, or tool
 2. From their description, determine the type:
-   - New top-level identity (e.g. "a writer") → **role** at `~/.squad/custom/[name]/dna.md`
-   - Hands off work and waits for results (e.g. "something that reviews security") → **specialist** at `~/.squad/[role]/custom/[name].md`
-   - Agent follows the steps itself (e.g. "a checklist before I push") → **tool** at `~/.squad/[role]/tools/[name].md`
+   - New top-level identity (e.g. "a writer") → **role** at `~/.squad/roles/custom/[name]/dna.md`
+   - Hands off work and waits for results (e.g. "something that reviews security") → **specialist** at `~/.squad/roles/[role]/custom/[name].md`
+   - Agent follows the steps itself (e.g. "a checklist before I push") → **tool** at `~/.squad/roles/[role]/tools/[name].md`
 3. If the user wants to base it on an existing role or specialist, read that file first
 4. Draft the file content and present it for approval before writing
 5. Write the file and confirm what was created and how to use it
@@ -174,7 +174,7 @@ When the user says `/squad create` or asks to create something new:
 When the user says `/squad update` or asks to modify a role or specialist:
 
 1. Ask what they want to change
-2. Locate the file — check `~/.squad/custom/` and `~/.squad/[role]/custom/` first. If the target is built-in, offer to create a custom version that overrides it.
+2. Locate the file — check `~/.squad/roles/custom/` and `~/.squad/roles/[role]/custom/` first. If the target is built-in, offer to create a custom version that overrides it.
 3. Read the current file and present it
 4. Discuss changes, then propose the updated content
 5. Write the file after approval
@@ -206,6 +206,6 @@ When the user says `/squad help`:
 
 When the user says `/squad list`:
 
-Glob for available roles at `~/.squad/*/dna.md` and `~/.squad/custom/*/dna.md`. For each role, find its specialists and tools:
-- **Specialists** — `~/.squad/[role]/*.md` and `~/.squad/[role]/custom/*.md` (exclude `dna.md`)
-- **Tools** — `~/.squad/[role]/tools/*.md`
+Glob for available roles at `~/.squad/roles/*/dna.md` and `~/.squad/roles/custom/*/dna.md`. For each role, find its specialists and tools:
+- **Specialists** — `~/.squad/roles/[role]/*.md` and `~/.squad/roles/[role]/custom/*.md` (exclude `dna.md`)
+- **Tools** — `~/.squad/roles/[role]/tools/*.md`
