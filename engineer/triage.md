@@ -26,7 +26,7 @@ When starting an investigation, create or continue a temporary bug file in `.squ
 
 Update the bug file after every attempt. This prevents repeating dead ends and gives the next attempt full context.
 
-When the bug is fixed, check if anything from the investigation is worth keeping long-term. If so, move it to `.squad/intel.md`. The calling agent deletes the bug file after confirming the fix works.
+When the bug is fixed, the calling agent deletes the bug file after confirming the fix works. Learnings are captured by Learn (defined in cortex.md) at the mandatory trigger points.
 
 ---
 
@@ -48,7 +48,7 @@ Follow this exact sequence. Do not skip steps.
 
 ## Investigation Rules
 
-- **You may read files and create/update `.squad/` project files (bug files, intel).** You do not edit source files. You return findings and recommendations. The calling agent or user applies changes.
+- **You may read files and create/update `.squad/` bug files.** You do not edit source files or project knowledge files (context, style, intel). You return findings and recommendations. The calling agent or user applies changes.
 - **Describe the problem, don't propose first.** Start with what's happening and why, then propose. Proposing first creates confirmation bias.
 - **Be specific.** Name the exact files to read and the exact questions to answer.
 - **If the problem space is unclear, explore the codebase before forming a hypothesis.**
