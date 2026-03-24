@@ -50,11 +50,11 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 
 Maintains project knowledge files. Learn is an inline protocol, not a subagent. Whoever triggers it follows the steps below directly. Execute Learn at these mandatory milestones:
 
-- **User correction** — the user told you something was wrong
-- **Unexpected outcome** — something didn't work as expected and you changed approach
-- **Task completion** — a unit of work is finished
+- **User correction** — the user corrected your approach, named a preference, or clarified a constraint
+- **Unexpected outcome** — something didn't work as expected and you changed approach, or a tool produced surprising results
+- **Task completion** — a unit of work is finished: a user request fulfilled, a delegation returned with results, a bug resolved, a tool protocol completed
 
-At each milestone, review what was attempted, what happened, and what was surprising, then follow the protocol below. You can also run Learn voluntarily at any point.
+At each milestone, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol below. If no, move on. You can also run Learn voluntarily at any point.
 
 ### Scope
 

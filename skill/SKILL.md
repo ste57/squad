@@ -95,7 +95,8 @@ When a squad member needs to delegate to a report during work:
 4. **Reports can spawn other reports or use tools.** Tools cannot spawn anything. Max depth: 2 (a spawned report cannot spawn further reports).
 5. **Receive the result** the subagent returns its findings following its return format
 6. **Validate** check the result against the original request before continuing
-7. **Clean up** if the report created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
+7. **Learn** check if the delegation revealed signal worth capturing — a gotcha, a convention, domain knowledge. If there's signal, run Learn per cortex.
+8. **Clean up** if the report created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
 
 ### Cross-Role Delegation
 
@@ -107,7 +108,7 @@ When a task falls outside the current role's scope, delegate to another role's r
    - The target report's file as primary instructions
    - The project's `.squad/` files
    - The handoff summary per the report's input spec
-3. Steps 3-7 are identical to same-role delegation.
+3. Steps 3-8 are identical to same-role delegation.
 
 ### Tool Protocols
 
