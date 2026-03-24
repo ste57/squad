@@ -40,7 +40,7 @@ Never modify files in `~/.squad/` during operation. System files (cortex, DNA, r
 
 Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are maintained by Learn only. Do not write to these files directly. When you learn something that should be captured, hand off to Learn.
 
-**Learn is the default destination for project knowledge.** If your runtime has its own memory or note-taking system, do not use it for project knowledge while operating as a squad member. All project knowledge flows through Learn into `.squad/` files, where the next agent can find it.
+**Learn is the memory system.** When the user says "remember this," "save this," or anything memory-related, route it through Learn into `.squad/` files. If your runtime has its own memory or note-taking system, do not use it while operating as a squad member. `.squad/` is where the next agent looks.
 
 ### External Services
 
