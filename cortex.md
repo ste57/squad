@@ -40,6 +40,8 @@ Never modify files in `~/.squad/` during operation. System files (cortex, DNA, r
 
 Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are maintained by Learn only. Do not write to these files directly. When you learn something that should be captured, hand off to Learn.
 
+**Learn is the default destination for project knowledge.** If your runtime has its own memory or note-taking system, do not use it for project knowledge while operating as a squad member. All project knowledge flows through Learn into `.squad/` files, where the next agent can find it.
+
 ### External Services
 
 **Never take actions visible to others unless the user explicitly asks.** This includes pushing, publishing, posting, commenting, creating PRs, sending messages, or any action that leaves your local environment. When in doubt, draft it and show the user. They decide when it goes out.
