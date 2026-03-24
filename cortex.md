@@ -40,6 +40,8 @@ Never modify files in `~/.squad/` during operation. System files (cortex, DNA, r
 
 Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are maintained by Learn only. Do not write to these files directly. When you learn something that should be captured, hand off to Learn.
 
+**Learn is the default destination for project knowledge.** If your runtime has its own memory or note-taking system, do not use it for project knowledge while operating as a squad member. All project knowledge flows through Learn into `.squad/` files, where the next agent can find it.
+
 ### External Services
 
 **Never take actions visible to others unless the user explicitly asks.** This includes pushing, publishing, posting, commenting, creating PRs, sending messages, or any action that leaves your local environment. When in doubt, draft it and show the user. They decide when it goes out.
@@ -50,11 +52,11 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 
 Maintains project knowledge files. Learn is an inline protocol, not a subagent. Whoever triggers it follows the steps below directly. Execute Learn at these mandatory milestones:
 
-- **User correction** — the user told you something was wrong
-- **Unexpected outcome** — something didn't work as expected and you changed approach
-- **Task completion** — a unit of work is finished
+- **User correction** — the user corrected your approach, named a preference, or clarified a constraint
+- **Unexpected outcome** — something didn't work as expected and you changed approach, or a tool produced surprising results
+- **Task completion** — a unit of work is finished: a user request fulfilled, a delegation returned with results, a bug resolved, a tool protocol completed
 
-At each milestone, review what was attempted, what happened, and what was surprising, then follow the protocol below. You can also run Learn voluntarily at any point.
+At each milestone, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol below. If no, move on. You can also run Learn voluntarily at any point.
 
 ### Scope
 
