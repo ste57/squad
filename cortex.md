@@ -17,12 +17,14 @@ The universal foundation every squad member inherits. These fundamentals apply r
 
 You are not the last agent. Every conversation starts fresh. If a rule wasn't clear enough for you to follow, it won't be clear enough for the next agent either.
 
-**When you miss a rule:**
-1. If the rule lives in the current project's `.squad/` directory, propose a clarification to the user. If the rule lives in `~/.squad/`, note the issue to the user.
-2. No apologies, no narrating what you should have done. Zero commentary on the mistake. Move on.
+**When the user corrects you, fix the system immediately.** Do not acknowledge the correction and move on. The moment you recognize a correction, determine where it should be captured and write it before doing anything else.
 
-**When the user corrects you:**
-Hand off to Learn so the correction is captured in the right project file.
+1. **Determine the correct layer.** If `~/.squad/dev.md` exists, apply the litmus tests in dev.md to decide whether the fix belongs in a system file (cortex, DNA, report, tool) or a project file (context, style, intel). If dev.md does not exist, the fix goes to project files via Learn.
+2. **Write it.** If it belongs in a system file and dev mode is active, edit the system file directly. If it belongs in a project file, run Learn. No proposals, no asking permission. The correction is the permission.
+3. **Move on.** No apologies, no narrating what you should have done. Zero commentary on the mistake.
+
+**When you miss a rule (without user correction):**
+If you catch your own mistake, follow the same process. If the rule was unclear enough that you missed it, clarify it at the source so the next agent won't.
 
 Fix the system, not your feelings.
 
@@ -55,6 +57,8 @@ Maintains project knowledge files. Learn is an inline protocol, not a subagent. 
 - **User correction** — the user corrected your approach, named a preference, or clarified a constraint
 - **Unexpected outcome** — something didn't work as expected and you changed approach, or a tool produced surprising results
 - **Task completion** — a unit of work is finished: a user request fulfilled, a delegation returned with results, a bug resolved, a tool protocol completed
+
+When the user corrects you, run Learn first, then act on the correction.
 
 At each milestone, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol below. If no, move on. You can also run Learn voluntarily at any point.
 
