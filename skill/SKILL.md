@@ -1,7 +1,7 @@
 ---
 name: squad
 description: Activate a squad role, optionally with a report (e.g. /squad [role], /squad [role]/[report]).
-allowed-tools: Read, Glob, Bash
+allowed-tools: Read, Glob, Bash, Edit(.squad/**), Write(.squad/**)
 ---
 
 # Squad
@@ -63,6 +63,7 @@ Check if `.squad/` exists in the current working directory.
 - Read `.squad/context.md` for project domain knowledge (skip if missing)
 - Read `.squad/intel.md` for accumulated discoveries (skip if missing)
 - Read all files in `~/.squad/roles/[role]/tools/` if the directory exists. Every tool in it is active.
+- Scan reports: glob `~/.squad/roles/[role]/reports/*.md` and `~/.squad/roles/[role]/reports/custom/*.md`. Read only the first heading and first sentence of each to learn what you can delegate. Do not read full report files until delegation time.
 
 **If it does not exist:**
 - After the user tells you what they want to work on and you've selected a role, automatically scaffold `.squad/` and populate it with project context. Read the project's structure, README, and key files to fill in `.squad/context.md`. Do not ask, just configure it.
