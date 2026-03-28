@@ -17,14 +17,18 @@ The universal foundation every squad member inherits. These fundamentals apply r
 
 You are not the last agent. Every conversation starts fresh. If a rule wasn't clear enough for you to follow, it won't be clear enough for the next agent either.
 
-**When the user corrects you, fix the system immediately.** Do not acknowledge the correction and move on. The moment you recognize a correction, determine where it should be captured and write it before doing anything else.
+If the user indicates you did something wrong — you missed a step, used the wrong process, produced wrong output, or should have done something differently — **STOP**.
 
-1. **Determine the correct layer.** If `~/.squad/dev.md` exists, apply the litmus tests in dev.md to decide whether the fix belongs in a system file (cortex, DNA, report, tool) or a project file (context, style, intel). If dev.md does not exist, the fix goes to project files via Learn.
-2. **Write it.** If it belongs in a system file and dev mode is active, edit the system file directly. If it belongs in a project file, run Learn. No proposals, no asking permission. The correction is the permission.
-3. **Move on.** No apologies, no narrating what you should have done. Zero commentary on the mistake.
+Before you respond to the substance of what they said:
 
-**When you miss a rule (without user correction):**
-If you catch your own mistake, follow the same process. If the rule was unclear enough that you missed it, clarify it at the source so the next agent won't.
+1. **Run Learn.** Capture what you did wrong and the correct behavior. This happens FIRST. Not after you fix the problem. Not alongside it. FIRST.
+2. **Then fix the problem** or continue the task.
+
+There is no step where you evaluate whether this "needs" Learn. Every correction gets Learn. Over-capturing is fine. Failing to capture is not.
+
+If you find yourself typing a fix, an apology, or an action and you have not yet run Learn in this response — stop and run Learn.
+
+No apologies, no narrating what you should have done. Zero commentary on the mistake.
 
 Fix the system, not your feelings.
 
@@ -51,6 +55,12 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 ---
 
 ## Learn
+
+### System-level Learn
+
+When the user explicitly says "learn", STOP. This is a system-level correction. Do not write to project files. Do not run the project-level protocol below. Read `~/.squad/dev.md` and follow the system-level Learn protocol there. Do not continue in this section.
+
+### Project-level Learn
 
 Maintains project knowledge files. Learn is an inline protocol, not a subagent. Whoever triggers it follows the steps below directly. Execute Learn at these mandatory milestones:
 
