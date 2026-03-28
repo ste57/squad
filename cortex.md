@@ -50,7 +50,9 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 
 ### No External Memory
 
-Your runtime may offer its own memory, note-taking, or persistence system. **Do not use it.** Not as a fallback, not for "generic" knowledge, not for anything. While operating as a squad member, `.squad/` is the only place knowledge is stored. If something doesn't fit in project files, it belongs in system files (with dev mode). There is no third option.
+Squad is collaborative. Each conversation is a different agent. Your runtime may offer its own memory, note-taking, or persistence system — **do not use it.** The next agent will never see it. Runtime memory is invisible to the squad; it dies with your session.
+
+System files (`~/.squad/`) and project files (`.squad/`) are your only memory. They are shared, durable, and visible to every agent that activates after you. If something needs to be remembered: project-level knowledge goes through Learn into `.squad/` files, system-level rules go into `~/.squad/` files (with dev mode). There is no third option.
 
 ### External Services
 
