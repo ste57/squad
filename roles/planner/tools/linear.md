@@ -1,38 +1,75 @@
 # Linear
 
-Connect and use Linear as the board backend via MCP.
+Use Linear as the board backend via MCP. When Linear is configured, all board operations go through Linear MCP tools — the local `.squad/board.md` file is not used.
 
 ---
 
 ## Setup
 
-When the user wants to use Linear as their board:
+### What the agent does
 
-1. **Check if Linear MCP is connected.** Search available tools for `linear`. If Linear tools exist, skip to step 3.
-2. **Connect the MCP server.** Tell the user to run:
+1. Check if Linear MCP tools are available (search available tools for `linear`).
+2. If connected, record `[board] Linear MCP` in `.squad/context.md` via Learn.
+3. Ask the user which team/project to use. Record the answer in `.squad/context.md`.
+
+### What the human must do
+
+1. **Connect the MCP server** (one-time). The agent cannot do this — it requires browser auth:
    ```
    ! claude mcp add --transport http linear-server https://mcp.linear.app/mcp
    ```
-   The `!` prefix runs it in the current session. They will need to authenticate via the browser. Once connected, Linear tools become available.
-3. **Record in project context.** Run Learn to add a `[board]` entry in `.squad/context.md` noting Linear as the board backend.
-4. **Do not create `.squad/board.md`.** When Linear is the backend, the local board file is not used.
+2. **Authenticate** when prompted in the browser.
+
+The agent should not proceed with Linear operations until tools are confirmed available.
+
+---
+
+## Authentication
+
+### What the agent does
+
+1. Before any Linear operation, verify connection by checking if Linear MCP tools respond.
+2. If tools fail or are missing, tell the human what to do (see below).
+
+### What the human must do
+
+If the agent reports Linear is disconnected or needs auth, run:
+```
+! claude mcp list
+```
+This triggers the OAuth flow in the browser. The agent re-checks after the human confirms they've authenticated.
+
+---
 
 ## Usage
 
-When Linear is connected, use Linear MCP tools instead of reading/writing `.squad/board.md`. Map board operations to Linear:
+Map board operations to Linear MCP tools:
 
-- **Add item** → create a Linear issue
-- **Complete item** → update the issue status to done
-- **Status/briefing** → query Linear for active issues
-- **History** → query Linear for completed issues
+| Board operation | Linear action |
+|-----------------|---------------|
+| Add item        | Create issue  |
+| Complete item   | Update issue status to done |
+| Status/briefing | Query active issues |
+| History         | Query completed issues |
 
-Ask the user which team/project to use on first interaction. Record it in `.squad/context.md` via Learn.
+### What the agent does
+
+- All reads and writes go through Linear MCP tools — never touch `.squad/board.md`.
+- On first interaction, ask which team/project to use and record it via Learn.
+- Apply the priority mapping below when creating or reading issues.
+
+### What the human must do
+
+- Answer which team/project to use when asked.
+- Nothing else — all Linear operations are handled by the agent once connected.
+
+---
 
 ## Priority Mapping
 
-| Board    | Linear   |
-|----------|----------|
-| critical | Urgent   |
-| high     | High     |
-| medium   | Medium   |
-| low      | Low      |
+| Board    | Linear |
+|----------|--------|
+| critical | Urgent |
+| high     | High   |
+| medium   | Medium |
+| low      | Low    |

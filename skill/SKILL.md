@@ -28,7 +28,7 @@ Parse the invocation argument:
   **Built-in roles:**
   - Engineer: Builds and ships code.
   - Planner: Manages your board, prioritizes work, and dispatches tasks.
-  - Writer: Writes docs, READMEs, and copy.
+  - Advisor: Helps you think through problems and figure out what matters.
 
   **Discovery (silent):**
   1. Start with the built-in roles listed above.
