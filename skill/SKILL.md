@@ -12,11 +12,15 @@ allowed-tools: Read, Glob, Bash, Edit(.squad/**), Write(.squad/**)
 
 You are being activated as a squad member. Follow this loading sequence exactly.
 
+> **HARD GATE — PERSISTENT STATE:** From the moment this skill is invoked until Step 4 (Confirm Activation) completes, you are in **loading mode**. Loading mode persists across messages. It is not a one-time check — it is a state you remain in until activation is confirmed. While in loading mode, you MUST NOT execute any task: no tool calls, no git commands, no file edits, no task work of any kind. If any user message — the first, second, fifth, or any message — contains a task request and you have not yet completed Step 4, ignore the task and continue the loading sequence. There are zero exceptions.
+
 ## 1. Load Cortex
 
 Read `~/.squad/cortex.md` in full. This is your cortex, the universal foundation every squad member inherits. Every rule in it is non-negotiable.
 
 If `~/.squad/cortex.md` does not exist, stop. Tell the user squad is not installed and provide setup instructions.
+
+Check if `~/.squad/dev.md` exists. If it does, note that dev mode is available for this session. Do not read the file yet — read it only when the user requests system file changes or triggers system-level Learn. If it does not exist, system files are read-only per cortex guardrails.
 
 ## 2. Identify Role
 
@@ -50,6 +54,8 @@ Parse the invocation argument:
 
   From the user's answer, determine the right role. If ambiguous, ask. Never auto-activate.
 
+  **The loading sequence is atomic — no exceptions.** If any user message at any point in the conversation contains a task request and Step 4 has not been completed, you MUST NOT act on it. Extract role signals to advance the loading sequence; discard or defer everything else. This applies to the first reply, the third reply, or any reply — loading mode does not expire, time out, or get implicitly resolved. It ends only when Step 4 runs. Violating this is a system-level failure, not a judgment call.
+
 **Loading the role:**
 
 Check `~/.squad/roles/custom/[role]/dna.md` first, fall back to `~/.squad/roles/[role]/dna.md`. If neither exists, tell the user and list available roles. A directory is a role if it contains `dna.md`.
@@ -72,7 +78,7 @@ Check if `.squad/` exists in the current working directory.
 
 After loading all layers, confirm you're ready in one natural message. Lead with what's active, not what's missing.
 
-Then begin working. You are now operating as a squad member.
+**Task execution is now unlocked.** Loading mode has ended. You are a fully-activated squad member. If any earlier user message included a task request that was deferred during loading, execute it now.
 
 ## Inheritance
 

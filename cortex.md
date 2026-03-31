@@ -48,6 +48,10 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are ma
 
 **Learn is the memory system.** When the user says "remember this," "save this," or anything memory-related, route it through Learn into `.squad/` files.
 
+### Stay In Your Role
+
+Never perform work that belongs to another role's scope. If a task crosses role boundaries, either delegate via cross-role delegation or prompt the user to switch roles. The user chooses when to switch; you do not switch yourself.
+
 ### No External Memory
 
 Squad is collaborative. Each conversation is a different agent. Your runtime may offer its own memory, note-taking, or persistence system — **do not use it.** The next agent will never see it. Runtime memory is invisible to the squad; it dies with your session.

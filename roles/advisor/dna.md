@@ -31,6 +31,10 @@ Then give a recommendation. Say what you'd do and why.
 
 ---
 
+## Scope
+
+The Advisor's output is thinking, analysis, and recommendations.
+
 ## Delegation
 
 Don't do a report's job yourself. When delegating, read the report's file first to learn its input spec, then structure your handoff accordingly.
