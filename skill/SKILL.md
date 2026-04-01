@@ -93,29 +93,62 @@ cortex (absolute) → DNA → project files (style, context, intel) → tools
 When a squad member needs to delegate to a report during work:
 
 1. **Read the report's file** check `~/.squad/roles/[role]/reports/custom/` first, then `~/.squad/roles/[role]/reports/`. Read the report's input spec to know what format it expects.
-2. **Spawn a subagent** the subagent receives:
+2. **Build the handoff** using the envelope format below. Every delegation uses this structure — no exceptions.
+3. **Spawn a subagent** the subagent receives:
    - `~/.squad/cortex.md` and `~/.squad/roles/[role]/dna.md` for foundation
    - The report's file as its primary instructions
    - The project's `.squad/` files for context (style, context, intel)
-   - The handoff summary structured according to the report's input spec
-3. **The subagent works in isolation** it does not see the parent's full conversation. If the handoff is missing information, the subagent returns early stating what's missing.
-4. **Reports can spawn other reports or use tools.** Tools cannot spawn anything. Max depth: 2 (a spawned report cannot spawn further reports).
-5. **Receive the result** the subagent returns its findings following its return format
-6. **Validate** check the result against the original request before continuing
-7. **Learn** check if the delegation revealed signal worth capturing — a gotcha, a convention, domain knowledge. If there's signal, run Learn per cortex.
-8. **Clean up** if the report created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
+   - The handoff envelope
+4. **The subagent works in isolation** it does not see the parent's full conversation. The envelope is its only window into what happened before. If the handoff is missing information, the subagent returns early stating what's missing.
+5. **Reports can spawn other reports or use tools.** Tools cannot spawn anything. Max depth: 2 (a spawned report cannot spawn further reports).
+6. **Receive the result** the subagent returns its findings following its return format
+7. **Validate** check the result against the original request before continuing
+8. **Learn** check if the delegation revealed signal worth capturing — a gotcha, a convention, domain knowledge. If there's signal, run Learn per cortex.
+9. **Clean up** if the report created temporary files, the delegating agent is responsible for cleanup after the work is confirmed complete
+
+### Handoff Envelope
+
+Every delegation — same-role or cross-role — uses this structure. The report's input spec defines what goes in the Task section; the rest is universal context that would otherwise be lost.
+
+```markdown
+## Handoff
+
+### Origin
+- **Role:** [delegating role]
+- **Report:** [target report name]
+- **Trigger:** [what prompted this — user request, discovery during work, escalation from a failed attempt, cross-role dispatch]
+
+### Background
+[2-5 sentences. What the user originally asked for. What's been discussed or
+decided so far. What the delegating agent has already tried or ruled out.
+Write this as if the reader has zero context — because they do.]
+
+### Task
+[The report's input fields go here. Structure this section according to
+the target report's Input spec — e.g. Question/Scope/Context for researcher,
+Symptom/Suspected files/Prior attempts for triage, etc.]
+
+### Constraints
+[Anything that limits the work. User-stated boundaries ("don't touch X",
+"must ship by Friday"), scope limits, approach preferences, files or areas
+that are off-limits. Omit this section only if there are genuinely no
+constraints.]
+```
+
+**Writing a good envelope:**
+- **Background is the most important section.** A subagent with good background and thin task fields will outperform one with detailed task fields and no background.
+- **Don't summarize — transfer context.** Include the user's actual words when they matter. "User said: we can't change the API contract" is better than "there are API constraints."
+- **Include what you ruled out.** If you already explored an approach and it didn't work, say so. Prevents the subagent from retreating the same ground.
+- **For chained delegations** (a report spawning another report), carry forward the original background and append what the intermediate report discovered. Context accumulates, it doesn't reset.
 
 ### Cross-Role Delegation
 
-When a task falls outside the current role's scope, delegate to another role's report. The protocol is the same as above, except step 1 looks beyond the current role:
+When a task falls outside the current role's scope, delegate to another role's report. The protocol is the same as above, except:
 
 1. **Identify the target role and report.** Check `~/.squad/roles/[target-role]/reports/` for a report that matches the task.
-2. **Spawn a subagent** with the target role's DNA (`~/.squad/roles/[target-role]/dna.md`), not the current role's. The subagent receives:
-   - `~/.squad/cortex.md` and the **target role's** `dna.md`
-   - The target report's file as primary instructions
-   - The project's `.squad/` files
-   - The handoff summary per the report's input spec
-3. Steps 3-8 are identical to same-role delegation.
+2. **Use the target role's DNA** (`~/.squad/roles/[target-role]/dna.md`), not the current role's.
+3. **The handoff envelope is especially important here.** Cross-role delegations lose the most context because the subagent loads a different DNA and has no shared frame of reference with the delegating role. The Background section must bridge that gap — include not just what the user asked, but why this work matters in the context of the originating role's goals.
+4. Steps 4-9 are identical to same-role delegation.
 
 ### Tool Protocols
 
