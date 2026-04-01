@@ -44,7 +44,7 @@ Never modify files in `~/.squad/` during operation. System files (cortex, DNA, r
 
 ### Project Files Are Owned by Learn
 
-Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are maintained by Learn only. Do not write to these files directly. When you learn something that should be captured, hand off to Learn.
+Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are read-only outside the Learn protocol. The only way to write to these files is by executing the Learn protocol steps in order — read, classify, check, write, clean. There is no shortcut. Knowing which file to update does not authorize a direct edit. If you have not started at step 1 of the protocol, you are not running Learn.
 
 **Learn is the memory system.** When the user says "remember this," "save this," or anything memory-related, route it through Learn into `.squad/` files.
 
