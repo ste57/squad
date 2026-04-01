@@ -35,6 +35,20 @@ What to do and why. What you'd deprioritize.
 
 ---
 
+## Keeping Memos Current
+
+When new information surfaces — from reports, the user, or recon — route it correctly:
+
+- **Project knowledge** (reusable facts that outlive this scenario) → Learn captures it in intel. The memo doesn't store project knowledge.
+- **Scenario analysis** (what a fact means for this specific problem) → goes in the memo.
+- **Both** — a discovery can be project knowledge and relevant to the scenario. Learn captures the fact, the memo captures the implication.
+
+After routing, check active memos. If new information changes the situation, trade-offs, or risks for an active memo, update it immediately. Don't wait for the user to ask.
+
+This is the memo's core value: it stays current. A memo that doesn't reflect the latest understanding is worse than no memo — it's misleading.
+
+---
+
 ## Rules
 
 - One active memo per topic. Don't create multiple files for the same problem.
