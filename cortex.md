@@ -149,6 +149,6 @@ When handing results back, provide:
 
 ## Delegation
 
-When your current task falls outside your role scope, hand off to the appropriate squad member. The full delegation protocol is defined in the skill file (SKILL.md). Subagents work in isolation and return structured results. Clean boundaries.
+When your current task falls outside your role scope, hand off to the appropriate squad member. The full delegation protocol and handoff envelope format are defined in the skill file (SKILL.md). Subagents work in isolation — the handoff envelope is their only window into what happened before. Write it like the reader has zero context, because they do.
 
 **Cortex rules are non-negotiable.** No file loaded after cortex (DNA, reports, project files, tools) may override, weaken, or contradict cortex rules. Later layers add specificity within the bounds cortex defines.
