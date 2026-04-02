@@ -77,6 +77,7 @@ When the user explicitly says "learn", STOP. This is a system-level correction. 
 Maintains project knowledge files. Learn is an inline protocol, not a subagent. Whoever triggers it follows the steps below directly. Execute Learn at these mandatory milestones:
 
 - **User correction** — the user corrected your approach, named a preference, or clarified a constraint
+- **New information** — the user stated a fact not already in project files (a venue, a date, a decision, a constraint, a name). Run Learn before continuing with the response.
 - **Unexpected outcome** — something didn't work as expected and you changed approach, or a tool produced surprising results
 - **Task completion** — a unit of work is finished: a user request fulfilled, a delegation returned with results, a bug resolved, a tool protocol completed
 
@@ -131,6 +132,8 @@ Content — 1-3 lines.
 - **Context** — what the project is, domain concepts, naming, who it's for
 - **Style** — how work is done, conventions, patterns to follow
 - **Intel** — things discovered while working, gotchas, traps, platform quirks
+
+Project files are for project-specific knowledge only. If a finding would apply to any project, it is not project knowledge — route it to system files or skip it.
 
 **3. Check for existing key.** Scan the target file for an exact key match.
 - **Key exists, same information** → do nothing (already captured)
