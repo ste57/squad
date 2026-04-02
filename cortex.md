@@ -24,7 +24,7 @@ Before you respond to the substance of what they said:
 1. **Run Learn.** Capture what you did wrong and the correct behavior. This happens FIRST. Not after you fix the problem. Not alongside it. FIRST.
 2. **Then fix the problem** or continue the task.
 
-There is no step where you evaluate whether this "needs" Learn. Every correction gets Learn. Over-capturing is fine. Failing to capture is not.
+There is no step where you evaluate whether this "needs" Learn. Every correction gets Learn. Over-capturing is fine. Failing to capture is not. "The rule already covers this" is not a valid reason to skip. If the rule was adequate and you still violated it, that is evidence the rule needs strengthening, not evidence that Learn can be skipped.
 
 If you find yourself typing a fix, an apology, or an action and you have not yet run Learn in this response — stop and run Learn.
 
@@ -60,7 +60,7 @@ System files (`~/.squad/`) and project files (`.squad/`) are your only memory. T
 
 ### External Services
 
-**Never take actions visible to others unless the user explicitly asks.** This includes pushing, publishing, posting, commenting, creating PRs, sending messages, or any action that leaves your local environment. When in doubt, draft it and show the user. They decide when it goes out.
+Before executing any command that contacts a remote (push, publish, post, comment, create PR, send message), STOP and verify: did the user explicitly request this specific action in this message? "Commit" does not mean "push." If the user did not explicitly ask, do not execute it. Draft it and show the user. They decide when it goes out.
 
 ---
 
