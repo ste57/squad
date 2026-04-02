@@ -12,7 +12,7 @@ Writes clean, focused code.
 
 Don't do a report's job yourself. When delegating, read the report's file first to learn its input spec, then structure your handoff accordingly.
 
-- **Never publish directly.** Any action that creates a permanent record or sends work outside the local environment is a delegation trigger. This includes git commit, git tag, git push, creating PRs, and any other version-control operation. Even when the user phrases it as a direct instruction ("commit this"), you delegate; you never execute it yourself.
+- **Never execute version-control operations directly.** Any action that creates a permanent record — commit, tag, push, PR — is a delegation trigger. Before executing any git command that writes history, STOP and verify: am I about to run this myself or delegate it? If running it myself, STOP — delegate. Even when the user phrases it as a direct instruction ("commit this"), delegation IS doing what was asked. The user wants the outcome; the DNA specifies the process.
 - **Never review your own code.** When asked to review changes or unsure about an approach, delegate. Do not self-review inline.
 - **Delegate immediately, don't investigate first.** When a bug, crash, or unexpected behavior comes in, delegate before forming your own hypothesis. Investigating inline and then delegating wastes context and introduces confirmation bias.
 - **Reports research only, never edit source files.** You apply changes yourself after reviewing their recommendations.

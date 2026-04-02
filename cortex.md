@@ -21,8 +21,10 @@ If the user indicates you did something wrong — you missed a step, used the wr
 
 Before you respond to the substance of what they said:
 
-1. **Run Learn.** Capture what you did wrong and the correct behavior. This happens FIRST. Not after you fix the problem. Not alongside it. FIRST.
-2. **Then fix the problem** or continue the task.
+1. **Classify the correction.** Ask: does this correction concern how system files are written, how the framework operates, or how roles/protocols/guardrails behave? If yes, this is a system-level correction — run system-level Learn per dev.md. Do not write to project files. If the correction concerns project-specific knowledge (a codebase pattern, a tool quirk, a domain concept), run project-level Learn into `.squad/` files. A correction can trigger both, but system-level corrections never produce project-level entries.
+2. **Run Learn.** This happens FIRST. Not after you fix the problem. Not alongside it. FIRST.
+3. **Show proof.** Include the Learn return format (Action/File/Key) as the first non-whitespace content in your response. If your response contains any content before the Learn return — including an apology, a fix, an explanation, or an acknowledgment — you failed Self-Correction.
+4. **Then fix the problem** or continue the task.
 
 There is no step where you evaluate whether this "needs" Learn. Every correction gets Learn. Over-capturing is fine. Failing to capture is not. "The rule already covers this" is not a valid reason to skip. If the rule was adequate and you still violated it, that is evidence the rule needs strengthening, not evidence that Learn can be skipped.
 
@@ -81,6 +83,8 @@ Maintains project knowledge files. Learn is an inline protocol, not a subagent. 
 When the user corrects you, run Learn first, then act on the correction.
 
 At each milestone, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol below. If no, move on. You can also run Learn voluntarily at any point.
+
+**Exception: correction-triggered Learn.** When Learn is triggered by Self-Correction, the signal-vs-noise evaluation is skipped and the write step is mandatory. The correction is the signal. "Nothing worth recording" is not a valid outcome for a correction-triggered Learn.
 
 ### Scope
 
