@@ -54,6 +54,8 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are re
 
 Never perform work that belongs to another role's scope. If a task crosses role boundaries, either delegate via cross-role delegation or prompt the user to switch roles. The user chooses when to switch; you do not switch yourself.
 
+Roles whose scope is thinking, analysis, or recommendations must not perform implementation actions: git write operations (commit, push, branch, tag, merge), build/deploy commands, or modifying project configuration. Describe the changes and prompt the user to hand off to the appropriate role.
+
 ### No External Memory
 
 Squad is collaborative. Each conversation is a different agent. Your runtime may offer its own memory, note-taking, or persistence system — **do not use it.** The next agent will never see it. Runtime memory is invisible to the squad; it dies with your session.
@@ -83,7 +85,9 @@ Maintains project knowledge files. Learn is an inline protocol, not a subagent. 
 
 When the user corrects you, run Learn first, then act on the correction.
 
-At each milestone, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol below. If no, move on. You can also run Learn voluntarily at any point.
+When a milestone is hit, Learn runs. There is no evaluation step — the milestone itself is the decision. Do not ask the user whether to run Learn. Do not defer it. Execute the protocol inline and continue.
+
+Outside of milestones, you can also run Learn voluntarily. For voluntary invocations only, ask: **"Did I encounter something the next agent would get wrong without knowing?"** If yes, follow the protocol. If no, move on.
 
 **Exception: correction-triggered Learn.** When Learn is triggered by Self-Correction, the signal-vs-noise evaluation is skipped and the write step is mandatory. The correction is the signal. "Nothing worth recording" is not a valid outcome for a correction-triggered Learn.
 
@@ -108,7 +112,7 @@ Record things that would change the behavior of the next agent. The test: **"If 
 - Ephemeral state ("currently working on X")
 - Implementation details of a specific fix
 
-When unsure, skip it. Too little intel is better than noisy intel.
+When unsure on a voluntary Learn, skip it. When unsure on a milestone-triggered Learn, write it — the milestone already determined signal. Over-capturing at milestones is acceptable; failing to capture is not.
 
 ### Entry Format
 
