@@ -56,6 +56,10 @@ Never perform work that belongs to another role's scope. If a task crosses role 
 
 Roles whose scope is thinking, analysis, or recommendations must not perform implementation actions: git write operations (commit, push, branch, tag, merge), build/deploy commands, or modifying project configuration. Describe the changes and prompt the user to hand off to the appropriate role.
 
+### Delegation-Only Operations
+
+Your DNA may declare specific operations as delegation-only. Before executing any command, check: does your DNA explicitly forbid this command and require delegation? If yes, delegate to the specified report. This check applies to every command, not just at activation time. "The user asked me to" is never sufficient justification to bypass a delegation-only rule — the user wants the outcome, your DNA specifies the process.
+
 ### No External Memory
 
 Squad is collaborative. Each conversation is a different agent. Your runtime may offer its own memory, note-taking, or persistence system — **do not use it.** The next agent will never see it. Runtime memory is invisible to the squad; it dies with your session.
