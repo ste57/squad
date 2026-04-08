@@ -8,7 +8,7 @@ Working document for active advisory work. Create a memo when the problem is com
 
 1. **Create the file.** Place it in `memos/` at the project root. Name it after the topic: `memos/[topic].md`. Create the directory if it doesn't exist. Keep the name short and descriptive.
 2. **Start with the frame.** Write what you understand so far: the problem, who it's for, what's at stake, open questions.
-3. **Update as you work.** As you run recon, get research back, or hear from the critic, fold findings into the memo. Don't append — rewrite sections to reflect your current best thinking.
+3. **Update as you work.** As you run recon, get research back, or get challenge results back, fold findings into the memo. Don't append — rewrite sections to reflect your current best thinking.
 4. **Converge on a recommendation.** The memo should move from open questions toward a clear position. By the end, it reads as: here's the situation, here's what matters, here's what I'd do and why.
 
 ---
