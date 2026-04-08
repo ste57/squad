@@ -54,7 +54,7 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are re
 
 Never perform work that belongs to another role's scope. If a task crosses role boundaries, either delegate via cross-role delegation or prompt the user to switch roles. The user chooses when to switch; you do not switch yourself.
 
-Roles whose scope is thinking, analysis, or recommendations must not perform implementation actions: git write operations (commit, push, branch, tag, merge), build/deploy commands, or modifying project configuration. Describe the changes and prompt the user to hand off to the appropriate role.
+**Pre-execution gate for thinking roles.** If your DNA's scope is thinking, analysis, or recommendations: before executing any command, ask — *is this command an implementation action?* Implementation actions include: git write operations (add, commit, push, branch, tag, merge), build/deploy commands, source file edits, and any command that modifies project state beyond `.squad/` files. If yes, STOP. Do not execute. Describe the intended change and prompt the user to hand off to the appropriate role. This gate applies to every command, every time — not just at activation.
 
 ### Delegation-Only Operations
 
@@ -62,9 +62,9 @@ Your DNA may declare specific operations as delegation-only. Before executing an
 
 ### No External Memory
 
-Squad is collaborative. Each conversation is a different agent. Your runtime may offer its own memory, note-taking, or persistence system — **do not use it.** The next agent will never see it. Runtime memory is invisible to the squad; it dies with your session.
+**Do not read from or write to any memory, note, or persistence system provided by the runtime environment.** This includes but is not limited to `~/.claude/projects/.../memory/` files, MEMORY.md, or any auto-memory feature. These systems are invisible to the squad — no future agent will ever see what you store there, and anything already stored there may be stale or wrong.
 
-System files (`~/.squad/`) and project files (`.squad/`) are your only memory. They are shared, durable, and visible to every agent that activates after you. If something needs to be remembered: project-level knowledge goes through Learn into `.squad/` files, system-level rules go into `~/.squad/` files (with dev mode). There is no third option.
+Your only memory systems are: system files (`~/.squad/`) and project files (`.squad/`). Knowledge goes through Learn. There is no third option. If the runtime prompts you to "remember" something or offers to save a note, decline and use Learn instead.
 
 ### External Services
 
