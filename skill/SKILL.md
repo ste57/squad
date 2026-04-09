@@ -1,7 +1,7 @@
 ---
 name: squad
 description: Activate a squad role, optionally with a report (e.g. /squad [role], /squad [role]/[report]).
-allowed-tools: Read, Glob, Bash, Edit(.squad/**), Write(.squad/**)
+allowed-tools: Read(~/.squad/**), Read(.squad/**), Glob(~/.squad/**), Glob(.squad/**), Bash, Edit(.squad/**), Write(.squad/**)
 ---
 
 # Squad
