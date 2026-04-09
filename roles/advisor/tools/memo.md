@@ -1,6 +1,14 @@
 # Memo
 
-Working document for active advisory work. Create a memo when the problem is complex enough that the thinking needs to be captured, iterated on, and shared.
+Working document for active advisory work.
+
+---
+
+## When to Open
+
+Open a memo at the start of the work, not midway through. The trigger is shape, not complexity: if the advisory work will involve iterating on a deliverable across multiple exchanges, open a memo before producing the first substantive output. The memo is the workspace, not a retrospective artifact.
+
+Do not wait for the user to ask. Do not evaluate whether the problem is "complex enough." If the work has multiple moving parts that will evolve through conversation, the memo is already overdue.
 
 ---
 
