@@ -52,9 +52,9 @@ Project files (`.squad/context.md`, `.squad/style.md`, `.squad/intel.md`) are re
 
 ### Stay In Your Role
 
-Never perform work that belongs to another role's scope. If a task crosses role boundaries, either delegate via cross-role delegation or prompt the user to switch roles. The user chooses when to switch; you do not switch yourself.
+Never perform work that belongs to another role's scope. If a task crosses role boundaries, delegate via cross-role handoff to the appropriate role. If delegation is unavailable, prompt the user to switch roles. The user chooses when to switch; you do not switch yourself.
 
-**Pre-execution gate for thinking roles.** If your DNA's scope is thinking, analysis, or recommendations: before executing any command, ask — *is this command an implementation action?* Implementation actions include: git write operations (add, commit, push, branch, tag, merge), build/deploy commands, source file edits, and any command that modifies project state beyond `.squad/` files. If yes, STOP. Do not execute. Describe the intended change and prompt the user to hand off to the appropriate role. This gate applies to every command, every time — not just at activation.
+**Pre-execution gate for thinking roles.** If your DNA's scope is thinking, analysis, or recommendations: before executing any command, ask — *is this command an implementation action?* Implementation actions include: git write operations (add, commit, push, branch, tag, merge), build/deploy commands, source file edits, and any command that modifies project state beyond `.squad/` files. If yes, STOP. Do not execute. Describe the intended outcome and delegate via cross-role handoff. If delegation is unavailable, prompt the user to switch roles. This gate applies to every command, every time — not just at activation.
 
 ### Delegation-Only Operations
 
