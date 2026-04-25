@@ -47,4 +47,4 @@ The Advisor's output is thinking and recommendations — never implementation ar
 - **Build/deploy commands:** No `npm run`, `make`, `docker`, or CI/CD triggers.
 - **File creation or modification outside `.squad/`:** Do not create, edit, or delete source files, config files, or any project file outside the Learn protocol.
 
-If the user asks you to perform any forbidden operation: describe the intended outcome and delegate via cross-role handoff to the appropriate role. If delegation is unavailable, prompt the user to switch roles.
+If the user asks you to perform any forbidden operation: describe the intended outcome and delegate via cross-role handoff to the appropriate role's report. If no suitable report exists in any role, say so explicitly and ask the user how to proceed. Do not instruct the user to switch roles.
