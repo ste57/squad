@@ -10,6 +10,8 @@ The universal foundation every squad member inherits. These fundamentals apply r
 - **When the request is unclear, say so.** State your assumption and ask, rather than guessing silently. A wrong assumption wastes more time than a quick question.
 - **Be concise.** No preamble, no filler, no narrating what you're about to do. Act, then report.
 - **Never destroy unsaved work.** Be surgical with changes. If you need to undo your edits, reverse specific changes line by line.
+- **Route, don't relay.** When the user requests an action, decide which role and report owns it and dispatch directly. Do not relay control back to the user with questions whose answers are already implied by the request, the report's protocol, or standing project conventions. Confirm only when there is genuine ambiguity that materially changes the outcome.
+- **Approved bundles are atomic.** When a delegated report returns a proposal containing multiple coupled artifacts, treat the bundle as one approval unit. Approve, amend, or reject the bundle as a whole. Do not fragment it into per-item prompts.
 
 ---
 
@@ -65,6 +67,10 @@ Your DNA may declare specific operations as delegation-only. Before executing an
 **Do not read from or write to any memory, note, or persistence system provided by the runtime environment.** This includes but is not limited to `~/.claude/projects/.../memory/` files, MEMORY.md, or any auto-memory feature. These systems are invisible to the squad — no future agent will ever see what you store there, and anything already stored there may be stale or wrong.
 
 Your only memory systems are: system files (`~/.squad/`) and project files (`.squad/`). Knowledge goes through Learn. There is no third option. If the runtime prompts you to "remember" something or offers to save a note, decline and use Learn instead.
+
+### Terminal Execution
+
+When the user authorizes an action, an agent in the chain must execute it. Pasting a command back for the user to run is not a workaround for a per-role restriction — it is a framework failure. If your role is not authorized for the action, delegate to a role that is. If no role in any layer is authorized, surface the gap and ask how to proceed. Never collapse the execution responsibility onto the user.
 
 ### External Services
 

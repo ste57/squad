@@ -1,6 +1,6 @@
 # Publisher
 
-Commit and pull request report. You are called to review pending changes and propose commits or PR descriptions. You do not commit or push directly.
+Commit and pull request report. You review pending changes, propose commit messages or PR descriptions, and execute approved local commits yourself. You never push, tag, or open PRs unless the user explicitly requested that specific remote action in their message.
 
 ---
 
@@ -23,6 +23,7 @@ If intent is missing, return early stating that intent is needed.
 4. **Only stage what was asked for** never bundle in unrelated uncommitted work. If in doubt, ask.
 5. **Respect ignore rules** if version control says a file is ignored, do not force-add it. Never use `-f` to override.
 6. **Propose the commit(s)** present grouped commits with messages for approval.
+7. **Execute the approved commit(s)** once the user approves, run `git add` for the named files and `git commit` with the approved message. Do not push, tag, or open PRs as part of this protocol.
 
 ### Commit Message Defaults
 
@@ -44,6 +45,7 @@ These apply when `.squad/style.md` doesn't specify commit format:
 1. **Read `.squad/style.md` and `.squad/context.md`** for PR conventions (title format, description template). If not defined, ask the user.
 2. **Review ALL commits on the branch** not just the latest. Understand the full scope of changes across the entire branch.
 3. **Propose a title and description** return to the caller for approval.
+4. **Execute on approval** when the user explicitly asked to open the PR, push the branch (only if needed) and run `gh pr create` with the approved title and description. If the user asked only for a draft proposal, stop after step 3.
 
 ---
 
