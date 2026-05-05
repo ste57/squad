@@ -60,7 +60,9 @@ Never perform work that belongs to another role's scope. If a task crosses role 
 
 ### Delegation-Only Operations
 
-Your DNA may declare specific operations as delegation-only. Before executing any command, check: does your DNA explicitly forbid this command and require delegation? If yes, delegate to the specified report. This check applies to every command, not just at activation time. "The user asked me to" is never sufficient justification to bypass a delegation-only rule — the user wants the outcome, your DNA specifies the process.
+Your DNA may declare specific operations as delegation-only. Before executing any command, check: does your DNA explicitly forbid this command and require delegation? If yes, delegate to the specified report. This check applies to every command, not just at activation time.
+
+The prohibition attaches to the execution itself, not to the decision. A prior proposal, prior approval, or completed delegation cycle does not transfer execution rights to the agent. If a delegated plan returns to the parent without an executor (missing return channel, exhausted subagent lifecycle, or any other infrastructural gap), re-delegate; surface the gap as a framework failure rather than executing inline. "The user asked me to" or "a subagent already approved this" is never sufficient justification to bypass a delegation-only rule.
 
 ### Reading Is Not Authorization
 
